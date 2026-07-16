@@ -30,17 +30,20 @@ export function Navbar() {
     { name: 'Contact', href: '/contact' },
   ];
 
+  const isHomePage = pathname === '/';
+  const isSolid = isScrolled || !isHomePage;
+
   return (
-    <header className={`fixed w-full z-40 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
+    <header className={`fixed w-full z-40 transition-all duration-500 ${isSolid ? 'glass-panel py-2' : 'bg-transparent py-4'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <div className="flex flex-col">
-              <span className={`text-2xl font-display font-bold leading-none ${isScrolled ? 'text-[#0D3B17]' : 'text-white'}`}>
+              <span className={`text-2xl font-display font-bold leading-none ${isSolid ? 'text-[#0D3B17]' : 'text-white'}`}>
                 AAI <span className="text-[#C8960C]">Unity</span> Farms
               </span>
-              <span className={`text-[10px] uppercase tracking-widest font-ui mt-1 ${isScrolled ? 'text-[#388E3C]' : 'text-white/80'}`}>
+              <span className={`text-[10px] uppercase tracking-widest font-ui mt-1 ${isSolid ? 'text-[#388E3C]' : 'text-white/80'}`}>
                 Quality • Integrity • Sustainability
               </span>
             </div>
@@ -54,26 +57,26 @@ export function Navbar() {
                 href={link.href}
                 className={`font-ui text-sm font-medium transition-colors ${
                   pathname === link.href
-                    ? (isScrolled ? 'text-[#C8960C]' : 'text-[#F9A825]')
-                    : (isScrolled ? 'text-[#424242] hover:text-[#0D3B17]' : 'text-white/90 hover:text-white')
+                    ? (isSolid ? 'text-[#C8960C]' : 'text-[#F9A825]')
+                    : (isSolid ? 'text-[#424242] hover:text-[#0D3B17]' : 'text-white/90 hover:text-white')
                 }`}
               >
                 {link.name}
               </Link>
             ))}
             
-            <div className="flex items-center gap-4 border-l border-white/20 pl-4">
+            <div className={`flex items-center gap-4 border-l pl-4 ${isSolid ? 'border-gray-200' : 'border-white/20'}`}>
               <Link
                 href="/quote"
                 className={`font-ui text-sm font-bold px-4 py-2 rounded transition-colors ${
-                  isScrolled
+                  isSolid
                     ? 'bg-[#0D3B17] text-white hover:bg-[#1B5E20]'
                     : 'bg-[#C8960C] text-[#0D3B17] hover:bg-[#F9A825]'
                 }`}
               >
                 Request Quote
               </Link>
-              <Link href="/shop" className={`relative p-2 ${isScrolled ? 'text-[#0D3B17]' : 'text-white'}`}>
+              <Link href="/shop" className={`relative p-2 ${isSolid ? 'text-[#0D3B17]' : 'text-white'}`}>
                 <ShoppingCart size={24} />
                 {totalItems > 0 && (
                   <span className="absolute top-0 right-0 bg-[#C8960C] text-[#0D3B17] text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
@@ -86,7 +89,7 @@ export function Navbar() {
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-4 md:hidden">
-            <Link href="/shop" className={`relative p-2 ${isScrolled ? 'text-[#0D3B17]' : 'text-white'}`}>
+            <Link href="/shop" className={`relative p-2 ${isSolid ? 'text-[#0D3B17]' : 'text-white'}`}>
               <ShoppingCart size={24} />
               {totalItems > 0 && (
                 <span className="absolute top-0 right-0 bg-[#C8960C] text-[#0D3B17] text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
@@ -96,7 +99,7 @@ export function Navbar() {
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={isScrolled ? 'text-[#0D3B17]' : 'text-white'}
+              className={isSolid ? 'text-[#0D3B17]' : 'text-white'}
             >
               {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>

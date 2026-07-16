@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 import { products } from '@/lib/data';
 import { MEDIA } from '@/lib/media';
 import { ArrowRight } from 'lucide-react';
+import { AnimatedGrid } from '@/components/AnimatedGrid';
 
 export const metadata: Metadata = {
   title: 'Our Products | AAI Unity Farms',
@@ -15,7 +16,7 @@ export default function ProductsPage() {
   const localProducts = products.filter(p => p.category !== 'Ghanaian Foods');
 
   return (
-    <div className="bg-[#FAFAFA] pt-20">
+    <div className="bg-gradient-subtle pt-20">
       {/* Hero Section */}
       <section className="relative h-[300px] flex items-center justify-center">
         <div className="absolute inset-0 z-0">
@@ -37,12 +38,12 @@ export default function ProductsPage() {
             <p className="text-[#757575] mt-2 font-sans">Prices subject to change. Contact us for bulk orders.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <AnimatedGrid>
             {localProducts.map(product => (
-              <div key={product.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group">
+              <div key={product.id} className="glass-panel rounded-xl shadow-lg border border-gray-100 overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                 <div className="relative h-56 overflow-hidden">
-                  <Image src={product.image} alt={product.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
-                  <div className="absolute top-3 left-3 bg-[#0D3B17] text-white px-2 py-1 rounded text-xs font-ui font-bold">
+                  <Image src={product.image} alt={product.name} fill className="object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
+                  <div className="absolute top-3 left-3 bg-gradient-farm text-white px-3 py-1 rounded text-xs font-ui font-bold shadow-md">
                     {product.category}
                   </div>
                 </div>
@@ -55,10 +56,10 @@ export default function ProductsPage() {
                 </div>
               </div>
             ))}
-          </div>
+          </AnimatedGrid>
 
           <div className="mt-16 text-center">
-            <Link href="/shop" className="inline-flex items-center gap-2 bg-[#0D3B17] text-white px-8 py-4 rounded-lg font-ui font-bold hover:bg-[#1B5E20] transition-colors">
+            <Link href="/shop" className="inline-flex items-center gap-2 bg-gradient-farm text-white px-8 py-4 rounded-lg font-ui font-bold shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
               Order Online Now <ArrowRight size={20} />
             </Link>
           </div>
@@ -66,7 +67,7 @@ export default function ProductsPage() {
       </section>
 
       {/* Export Teaser */}
-      <section className="py-16 bg-[#FAFAF5] border-t border-gray-200">
+      <section className="py-16 bg-white border-t border-gray-100 shadow-inner">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-2xl font-display font-bold text-[#1C1A14] mb-4">Looking for Export Products?</h2>
           <p className="text-[#424242] font-sans mb-6">We export premium Ghanaian Yams, Sweet Corn, and Soybeans to the UK and European Union.</p>
