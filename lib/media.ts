@@ -1,36 +1,36 @@
 export const MEDIA = {
   // Heroes
-  heroHome: 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=1920&q=80',       // Wide green farm landscape
-  heroAbout: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1920&q=80',      // African farm workers in field
-  heroExport: 'https://images.unsplash.com/photo-1578574577315-3fbeb0cecdc2?w=1920&q=80',     // Cargo shipping containers / export
-  heroProducts: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=1920&q=80',   // Poultry farm interior
-  heroContact: 'https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?w=1920&q=80',    // Ghanaian farm countryside
+  heroHome: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1920&auto=format&fit=crop',
+  heroAbout: 'https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?q=80&w=1920&auto=format&fit=crop',
+  heroExport: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1920&auto=format&fit=crop',
+  heroProducts: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?q=80&w=1920&auto=format&fit=crop',
+  heroContact: 'https://images.unsplash.com/photo-1523348830342-d0187cf0c28d?q=80&w=1920&auto=format&fit=crop',
 
   // Products
-  freshEggs: 'https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=800&q=80',       // Fresh brown eggs in tray
-  broilerChicken: 'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=800&q=80',     // Live broiler chickens
-  dressedChicken: 'https://images.unsplash.com/photo-1604503468506-a8da13d11bea?w=800&q=80',  // Dressed/processed whole chicken
-  dayOldChicks: 'https://images.unsplash.com/photo-1617791160536-598cf32026fb?w=800&q=80',    // Yellow day-old chicks
-  poultryFeed: 'https://images.unsplash.com/photo-1559181567-c3190ca9d222?w=800&q=80',        // Grain/feed in sacks
-  ghanaianYam: 'https://images.unsplash.com/photo-1590165482129-1b8b27698780?w=800&q=80',     // Yam tubers
-  sweetCorn: 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=800&q=80',          // Fresh sweet corn cobs
-  soybeans: 'https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=800&q=80',        // Soybeans / legumes in bulk
+  freshEggs: 'https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?q=80&w=800&auto=format&fit=crop',
+  broilerChicken: 'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?q=80&w=800&auto=format&fit=crop',
+  dressedChicken: 'https://images.unsplash.com/photo-1606728035253-49e8a23146de?q=80&w=800&auto=format&fit=crop',
+  dayOldChicks: 'https://images.unsplash.com/photo-1604085792782-8d92f276d7d8?q=80&w=800&auto=format&fit=crop',
+  poultryFeed: 'https://images.unsplash.com/photo-1595273670150-db0a3d39074c?q=80&w=800&auto=format&fit=crop',
+  ghanaianYam: 'https://images.unsplash.com/photo-1619472620067-e4359d99c354?q=80&w=800&auto=format&fit=crop',
+  sweetCorn: 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?q=80&w=800&auto=format&fit=crop',
+  soybeans: 'https://images.unsplash.com/photo-1550948390-6eb7fa773072?q=80&w=800&auto=format&fit=crop',
 
-  // Gallery — farm operations
-  gallery01: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800&q=80',       // Inside poultry house with chickens
-  gallery02: 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=800&q=80',       // Open farmland Ghana
-  gallery03: 'https://images.unsplash.com/photo-1484557052118-f32bd25b45b5?w=800&q=80',       // Eggs being collected / sorted
-  gallery04: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=800&q=80',       // Corn field harvest
-  gallery05: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&q=80',       // Farmers working in field
-  gallery06: 'https://images.unsplash.com/photo-1590165482129-1b8b27698780?w=800&q=80',       // Yam produce ready for market
+  // Gallery
+  gallery01: 'https://images.unsplash.com/photo-1523348830342-d0187cf0c28d?q=80&w=800&auto=format&fit=crop',
+  gallery02: 'https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=800&auto=format&fit=crop',
+  gallery03: 'https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?q=80&w=800&auto=format&fit=crop',
+  gallery04: 'https://images.unsplash.com/photo-1592991538534-00972b6f59ab?q=80&w=800&auto=format&fit=crop',
+  gallery05: 'https://images.unsplash.com/photo-1590682680695-43b964a3ae17?q=80&w=800&auto=format&fit=crop',
+  gallery06: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=800&auto=format&fit=crop',
 
-  // Team — professional headshot placeholders
-  teamMember1: 'https://ui-avatars.com/api/?name=Kwame+Asante&size=400&background=0D3B17&color=FFD700&bold=true&format=png',
-  teamMember2: 'https://ui-avatars.com/api/?name=Abena+Mensah&size=400&background=0D3B17&color=FFD700&bold=true&format=png',
-  teamMember3: 'https://ui-avatars.com/api/?name=Kofi+Boateng&size=400&background=0D3B17&color=FFD700&bold=true&format=png',
+  // Team
+  teamMember1: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop',
+  teamMember2: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&auto=format&fit=crop',
+  teamMember3: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop',
 
-  // Blog — agriculture / farming topics
-  blogPost1: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800&q=80',       // Poultry farming best practices
-  blogPost2: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=800&q=80',       // Crop export / harvest news
-  blogPost3: 'https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?w=800&q=80',       // Ghanaian agriculture landscape
+  // Blog
+  blogPost1: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?q=80&w=800&auto=format&fit=crop',
+  blogPost2: 'https://images.unsplash.com/photo-1589923188900-85dae523342b?q=80&w=800&auto=format&fit=crop',
+  blogPost3: 'https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?q=80&w=800&auto=format&fit=crop',
 };
