@@ -10,39 +10,50 @@ import { StatCounter } from '@/components/StatCounter';
 
 export default function Home() {
   return (
-    <div className="bg-[#FAFAFA]">
+    <div className="relative">
       {/* Hero Section */}
-      <section className="relative h-screen min-h-[600px] flex items-center justify-center pt-20">
+      <section className="relative h-screen min-h-[600px] flex items-center justify-center pt-20 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-[#0D3B17]/80 via-[#0D3B17]/60 to-[#1C1A14]/90 z-10" />
-          <Image
-            src={MEDIA.heroHome}
-            alt="AAI Unity Farms Landscape"
-            fill
-            className="object-cover"
-            priority
-            referrerPolicy="no-referrer"
-          />
+          <motion.div
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 10, ease: "easeOut" }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={MEDIA.heroHome}
+              alt="AAI Unity Farms Landscape"
+              fill
+              className="object-cover"
+              priority
+              referrerPolicy="no-referrer"
+            />
+          </motion.div>
         </div>
         
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-16"
-        >
-          <span className="inline-block py-1 px-3 rounded-full bg-[#C8960C]/20 border border-[#C8960C]/50 text-[#F9A825] font-ui text-sm font-bold tracking-wider mb-6 backdrop-blur-sm">
-            WELCOME TO AAI UNITY FARMS
-          </span>
-          <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 leading-tight">
-            Farming Today <br/> <span className="text-[#C8960C]">Feeding Tomorrow</span>
-          </h1>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-16"
+          >
+            <motion.span
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="inline-block py-1 px-3 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/50 text-[#FFD700] font-ui text-sm font-bold tracking-wider mb-6 backdrop-blur-sm"
+            >
+              WELCOME TO AAI UNITY FARMS
+            </motion.span>
+            <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 leading-tight">
+              Farming Today <br/> <motion.span animate={{ color: ['#D4AF37', '#FFD700', '#D4AF37'] }} transition={{ duration: 5, repeat: Infinity }} className="text-[#D4AF37]">Feeding Tomorrow</motion.span>
+            </h1>
           <p className="text-lg md:text-xl text-[#F1F8E9] max-w-2xl mx-auto mb-10 font-ui">
             Premium poultry products and fresh Ghanaian agricultural exports, delivered with a commitment to quality, integrity, and sustainability.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
-              <Link href="/shop" className="w-full px-8 py-4 bg-[#C8960C] text-[#0D3B17] font-ui font-bold rounded-lg hover:bg-[#F9A825] transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-xl">
+              <Link href="/shop" className="w-full px-8 py-4 bg-[#D4AF37] text-[#0D3B17] font-ui font-bold rounded-lg hover:bg-[#FFD700] transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-xl">
                 Shop Farm Fresh <ArrowRight size={20} />
               </Link>
             </motion.div>
@@ -68,15 +79,15 @@ export default function Home() {
             className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-white/20"
           >
             <motion.div variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }} className="flex items-center justify-center gap-3 py-2 md:py-0">
-              <ShieldCheck className="text-[#F9A825]" size={28} />
+              <ShieldCheck className="text-[#FFD700]" size={28} />
               <span className="font-ui font-bold text-lg text-shadow-sm">10+ Years of Excellence</span>
             </motion.div>
             <motion.div variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }} className="flex items-center justify-center gap-3 py-2 md:py-0">
-              <CheckCircle2 className="text-[#F9A825]" size={28} />
+              <CheckCircle2 className="text-[#FFD700]" size={28} />
               <span className="font-ui font-bold text-lg text-shadow-sm">Premium Quality Assured</span>
             </motion.div>
             <motion.div variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }} className="flex items-center justify-center gap-3 py-2 md:py-0">
-              <Leaf className="text-[#F9A825]" size={28} />
+              <Leaf className="text-[#FFD700]" size={28} />
               <span className="font-ui font-bold text-lg text-shadow-sm">Sustainable Practices</span>
             </motion.div>
           </motion.div>
@@ -84,7 +95,7 @@ export default function Home() {
       </div>
 
       {/* About Overview */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-white/40 backdrop-blur-[2px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div 
@@ -117,7 +128,7 @@ export default function Home() {
               <p className="text-[#424242] leading-relaxed mb-8 font-sans">
                 We are committed to providing healthy, affordable, and reliable farm products while maintaining high standards in farming, quality, and customer satisfaction.
               </p>
-              <Link href="/about" className="inline-flex items-center gap-2 text-[#0D3B17] font-ui font-bold hover:text-[#2E7D32] transition-colors border-b-2 border-[#C8960C] pb-1">
+              <Link href="/about" className="inline-flex items-center gap-2 text-[#0D3B17] font-ui font-bold hover:text-[#2E7D32] transition-colors border-b-2 border-[#D4AF37] pb-1">
                 Read our full story <ArrowRight size={18} />
               </Link>
             </motion.div>
@@ -126,7 +137,7 @@ export default function Home() {
       </section>
 
       {/* Two Audiences Split */}
-      <section className="py-24 bg-[#FAFAF5]">
+      <section className="py-24 bg-[#FAFAF5]/50 backdrop-blur-[2px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-display font-bold text-[#1C1A14] mb-4">How Can We Serve You?</h2>
@@ -167,7 +178,7 @@ export default function Home() {
             >
               <div className="h-64 relative overflow-hidden">
                 <Image src={MEDIA.ghanaianYam} alt="Export Commodities" fill className="object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#C8960C]/90 via-[#C8960C]/40 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#D4AF37]/90 via-[#D4AF37]/40 to-transparent"></div>
                 <h3 className="absolute bottom-6 left-6 text-3xl font-display font-bold text-white">International Export</h3>
               </div>
               <div className="p-8">
@@ -214,7 +225,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-[#C8960C]">
+      <section className="py-24 bg-[#D4AF37]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-display font-bold text-[#0D3B17] mb-6">Ready to work with us?</h2>
           <p className="text-[#1C1A14] text-lg font-sans mb-10">

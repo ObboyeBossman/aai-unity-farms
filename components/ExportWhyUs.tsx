@@ -15,13 +15,13 @@ export function ExportWhyUs() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-[#C8960C] font-ui font-bold tracking-widest uppercase mb-2">Export Standards</h2>
+            <h2 className="text-[#D4AF37] font-ui font-bold tracking-widest uppercase mb-2">Export Standards</h2>
             <h3 className="text-4xl font-display font-bold text-white mb-8">Why Partner With Us?</h3>
             
             <div className="space-y-6">
               <div className="flex gap-4 group">
-                <div className="w-12 h-12 rounded-full bg-[#1B5E20] flex items-center justify-center shrink-0 group-hover:bg-[#C8960C] transition-colors">
-                  <ShieldCheck className="text-[#C8960C] group-hover:text-[#0D3B17] transition-colors" />
+                <div className="w-12 h-12 rounded-full bg-[#1B5E20] flex items-center justify-center shrink-0 group-hover:bg-[#D4AF37] transition-colors">
+                  <ShieldCheck className="text-[#D4AF37] group-hover:text-[#0D3B17] transition-colors" />
                 </div>
                 <div>
                   <h4 className="font-ui font-bold text-xl mb-1">Quality Assurance</h4>
@@ -30,8 +30,8 @@ export function ExportWhyUs() {
               </div>
               
               <div className="flex gap-4 group">
-                <div className="w-12 h-12 rounded-full bg-[#1B5E20] flex items-center justify-center shrink-0 group-hover:bg-[#C8960C] transition-colors">
-                  <FileCheck className="text-[#C8960C] group-hover:text-[#0D3B17] transition-colors" />
+                <div className="w-12 h-12 rounded-full bg-[#1B5E20] flex items-center justify-center shrink-0 group-hover:bg-[#D4AF37] transition-colors">
+                  <FileCheck className="text-[#D4AF37] group-hover:text-[#0D3B17] transition-colors" />
                 </div>
                 <div>
                   <h4 className="font-ui font-bold text-xl mb-1">Compliance & Documentation</h4>
@@ -40,8 +40,8 @@ export function ExportWhyUs() {
               </div>
 
               <div className="flex gap-4 group">
-                <div className="w-12 h-12 rounded-full bg-[#1B5E20] flex items-center justify-center shrink-0 group-hover:bg-[#C8960C] transition-colors">
-                  <Plane className="text-[#C8960C] group-hover:text-[#0D3B17] transition-colors" />
+                <div className="w-12 h-12 rounded-full bg-[#1B5E20] flex items-center justify-center shrink-0 group-hover:bg-[#D4AF37] transition-colors">
+                  <Plane className="text-[#D4AF37] group-hover:text-[#0D3B17] transition-colors" />
                 </div>
                 <div>
                   <h4 className="font-ui font-bold text-xl mb-1">Reliable Logistics</h4>
@@ -58,7 +58,7 @@ export function ExportWhyUs() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="glass-panel-dark p-10 rounded-2xl text-center shadow-2xl"
           >
-            <Globe className="mx-auto text-[#C8960C] mb-6 animate-pulse" size={64} />
+            <Globe className="mx-auto text-[#D4AF37] mb-6 animate-pulse" size={64} />
             <h4 className="text-2xl font-display font-bold mb-4">Serving Europe</h4>
             <p className="text-[#C8E6C9] font-sans mb-8">We are actively expanding our export network across the United Kingdom and the European Union.</p>
             <Link href="/quote" className="inline-block w-full py-4 bg-gradient-farm text-white font-ui font-bold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">

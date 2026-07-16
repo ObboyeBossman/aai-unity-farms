@@ -32,8 +32,8 @@ export default function ShopPage() {
   };
 
   return (
-    <div className="bg-[#FAFAFA] pt-28 pb-20 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="pt-28 pb-20 min-h-screen relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <div className="text-center mb-12">
           <h1 className="text-4xl font-display font-bold text-[#1C1A14] mb-4">Farm Shop</h1>
@@ -51,7 +51,7 @@ export default function ShopPage() {
                   onClick={() => setActiveCategory(cat)}
                   className={`px-4 py-2 rounded-full font-ui text-sm font-medium transition-colors ${
                     activeCategory === cat 
-                      ? 'bg-[#0D3B17] text-white' 
+                      ? 'bg-[#0D3B17] text-white'
                       : 'bg-white text-[#424242] border border-gray-200 hover:border-[#0D3B17]'
                   }`}
                 >
@@ -93,7 +93,7 @@ export default function ShopPage() {
           <div className="w-full lg:w-80 shrink-0">
             <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6 sticky top-28">
               <h2 className="text-xl font-display font-bold text-[#1C1A14] mb-4 pb-4 border-b border-gray-100 flex items-center gap-2">
-                <ShoppingBag size={20} className="text-[#C8960C]" /> Your Order
+                <ShoppingBag size={20} className="text-[#D4AF37]" /> Your Order
               </h2>
 
               {items.length === 0 ? (

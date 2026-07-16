@@ -22,8 +22,8 @@ export default function GalleryPage() {
   ];
 
   return (
-    <div className="bg-[#FAFAFA] pt-28 pb-20 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="pt-28 pb-20 min-h-screen relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-display font-bold text-[#1C1A14] mb-4">Farm Gallery</h1>

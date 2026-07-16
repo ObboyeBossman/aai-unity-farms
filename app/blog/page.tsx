@@ -39,8 +39,8 @@ export default function BlogPage() {
   ];
 
   return (
-    <div className="bg-[#FAFAFA] pt-28 pb-20 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="pt-28 pb-20 min-h-screen relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-display font-bold text-[#1C1A14] mb-4">Blog & News</h1>
@@ -54,7 +54,7 @@ export default function BlogPage() {
             <article key={post.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden group flex flex-col">
               <div className="relative h-56 overflow-hidden">
                 <Image src={post.image} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
-                <div className="absolute top-4 left-4 bg-[#C8960C] text-[#0D3B17] px-3 py-1 rounded-full text-xs font-ui font-bold">
+                <div className="absolute top-4 left-4 bg-[#D4AF37] text-[#0D3B17] px-3 py-1 rounded-full text-xs font-ui font-bold">
                   {post.category}
                 </div>
               </div>
@@ -63,7 +63,7 @@ export default function BlogPage() {
                 <h3 className="font-display font-bold text-xl text-[#1C1A14] mb-3 group-hover:text-[#2E7D32] transition-colors">{post.title}</h3>
                 <p className="text-[#424242] font-sans text-sm leading-relaxed mb-6 flex-grow">{post.excerpt}</p>
                 
-                <Link href="#" className="inline-flex items-center gap-2 text-[#0D3B17] font-ui font-bold hover:text-[#C8960C] transition-colors mt-auto">
+                <Link href="#" className="inline-flex items-center gap-2 text-[#0D3B17] font-ui font-bold hover:text-[#D4AF37] transition-colors mt-auto">
                   Read Article <ArrowRight size={16} />
                 </Link>
               </div>

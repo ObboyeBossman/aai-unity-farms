@@ -12,7 +12,8 @@ export const metadata: Metadata = {
 
 export default function ExportPage() {
   return (
-    <div className="bg-[#FAFAFA] pt-20">
+    <div className="pt-20 relative">
+      <div className="relative z-10">
       {/* Hero Section */}
       <section className="relative h-[500px] flex items-center justify-center">
         <div className="absolute inset-0 z-0">
@@ -23,7 +24,7 @@ export default function ExportPage() {
           <span className="inline-block py-1 px-3 rounded-full border border-white/30 text-white font-ui text-sm font-bold tracking-wider mb-6 backdrop-blur-sm shadow-sm">
             INTERNATIONAL B2B EXPORT
           </span>
-          <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">Ghana&apos;s Finest, <br/><span className="text-[#C8960C]">Delivered to the World</span></h1>
+          <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">Ghana&apos;s Finest, <br/><span className="text-[#D4AF37]">Delivered to the World</span></h1>
           <p className="font-ui text-lg text-[#C8E6C9]">
             Reliable wholesale supply of premium Ghanaian agricultural commodities to importers in the UK and European Union.
           </p>
@@ -74,6 +75,7 @@ export default function ExportPage() {
 
       {/* Why Choose Us — Client Component (uses motion) */}
       <ExportWhyUs />
+    </div>
     </div>
   );
 }

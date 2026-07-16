@@ -40,7 +40,7 @@ export function StatCounter({ end, duration = 2000, suffix = '' }: { end: number
   }, [isVisible, end, duration]);
 
   return (
-    <span ref={ref} className="font-display font-bold text-4xl text-[#C8960C]">
+    <span ref={ref} className="font-display font-bold text-4xl text-[#D4AF37]">
       {count.toLocaleString()}{suffix}
     </span>
   );

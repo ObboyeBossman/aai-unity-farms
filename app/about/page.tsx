@@ -19,7 +19,8 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="bg-[#FAFAFA] pt-20">
+    <div className="pt-20 relative">
+      <div className="relative z-10">
       {/* Hero Section */}
       <section className="relative h-[400px] flex items-center justify-center">
         <div className="absolute inset-0 z-0">
@@ -46,7 +47,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-[#C8960C] font-ui font-bold tracking-widest uppercase mb-2">Who We Are</h2>
+              <h2 className="text-[#D4AF37] font-ui font-bold tracking-widest uppercase mb-2">Who We Are</h2>
               <h3 className="text-3xl font-display font-bold text-[#1C1A14] mb-6">Rooted in Ghana, Serving the World</h3>
               <p className="text-[#424242] leading-relaxed mb-6 font-sans text-lg">
                 AAI Unity Farms is a trusted poultry and food production business specializing in quality poultry products, fresh eggs, and nutritious food solutions.
@@ -77,7 +78,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div className="bg-[#1B5E20] p-10 rounded-2xl border border-[#2E7D32]">
-              <div className="w-16 h-16 bg-[#C8960C] rounded-full flex items-center justify-center mb-6">
+              <div className="w-16 h-16 bg-[#D4AF37] rounded-full flex items-center justify-center mb-6">
                 <span className="font-display font-bold text-2xl text-[#0D3B17]">M</span>
               </div>
               <h3 className="text-2xl font-display font-bold mb-4 text-[#FFF8E1]">Our Mission</h3>
@@ -86,7 +87,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="bg-[#1B5E20] p-10 rounded-2xl border border-[#2E7D32]">
-              <div className="w-16 h-16 bg-[#C8960C] rounded-full flex items-center justify-center mb-6">
+              <div className="w-16 h-16 bg-[#D4AF37] rounded-full flex items-center justify-center mb-6">
                 <span className="font-display font-bold text-2xl text-[#0D3B17]">V</span>
               </div>
               <h3 className="text-2xl font-display font-bold mb-4 text-[#FFF8E1]">Our Vision</h3>
@@ -102,7 +103,7 @@ export default function AboutPage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-[#C8960C] font-ui font-bold tracking-widest uppercase mb-2">Our Principles</h2>
+            <h2 className="text-[#D4AF37] font-ui font-bold tracking-widest uppercase mb-2">Our Principles</h2>
             <h3 className="text-3xl font-display font-bold text-[#1C1A14]">Core Values</h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -118,6 +119,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+    </div>
     </div>
   );
 }

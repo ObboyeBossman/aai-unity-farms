@@ -16,7 +16,8 @@ export default function ProductsPage() {
   const localProducts = products.filter(p => p.category !== 'Ghanaian Foods');
 
   return (
-    <div className="bg-gradient-subtle pt-20">
+    <div className="pt-20 relative">
+      <div className="relative z-10">
       {/* Hero Section */}
       <section className="relative h-[300px] flex items-center justify-center">
         <div className="absolute inset-0 z-0">
@@ -49,7 +50,7 @@ export default function ProductsPage() {
                 </div>
                 <div className="p-5">
                   <h3 className="font-ui font-bold text-lg text-[#1C1A14] mb-2">{product.name}</h3>
-                  <div className="text-[#C8960C] font-display font-bold text-xl mb-4">
+                  <div className="text-[#D4AF37] font-display font-bold text-xl mb-4">
                     {product.price ? `GHS ${product.price}` : 'Contact for Price'}
                     <span className="text-[#757575] font-sans text-sm font-normal ml-1">/ {product.unit}</span>
                   </div>
@@ -71,11 +72,12 @@ export default function ProductsPage() {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-2xl font-display font-bold text-[#1C1A14] mb-4">Looking for Export Products?</h2>
           <p className="text-[#424242] font-sans mb-6">We export premium Ghanaian Yams, Sweet Corn, and Soybeans to the UK and European Union.</p>
-          <Link href="/export" className="text-[#0D3B17] font-ui font-bold border-b-2 border-[#C8960C] pb-1 hover:text-[#2E7D32]">
+          <Link href="/export" className="text-[#0D3B17] font-ui font-bold border-b-2 border-[#D4AF37] pb-1 hover:text-[#2E7D32]">
             View our Export Services
           </Link>
         </div>
       </section>
+    </div>
     </div>
   );
 }

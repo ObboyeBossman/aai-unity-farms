@@ -23,7 +23,7 @@ export function AnnouncementBar() {
   if (!isVisible) return null;
 
   return (
-    <div className="bg-[#0D3B17] text-[#FFF8E1] px-4 py-2 flex items-center justify-between text-sm font-ui relative z-50">
+    <div className="bg-[#0D3B17]/95 backdrop-blur-sm text-[#FFF8E1] px-4 py-2 flex items-center justify-between text-sm font-ui relative z-50 border-b border-white/10">
       <div className="flex-1 text-center pr-8">
         <span className="hidden sm:inline">Now exporting premium Ghanaian yams and agricultural commodities to the UK and EU. </span>
         <span className="sm:hidden">UK/EU Export Programme now open. </span>

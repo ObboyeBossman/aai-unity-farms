@@ -28,7 +28,11 @@ export function AnimatedGrid({ children }: { children: React.ReactNode }) {
       className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
     >
       {React.Children.map(children, (child) => (
-        <motion.div variants={itemVariants} className="h-full">
+        <motion.div
+          variants={itemVariants}
+          whileHover={{ y: -10, transition: { duration: 0.3 } }}
+          className="h-full"
+        >
           {child}
         </motion.div>
       ))}

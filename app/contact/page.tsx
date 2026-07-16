@@ -30,8 +30,8 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-gradient-subtle pt-28 pb-20 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="pt-28 pb-20 min-h-screen relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -59,7 +59,7 @@ export default function ContactPage() {
               
               <div className="space-y-6">
                 <div className="flex gap-4">
-                  <MapPin className="text-[#C8960C] shrink-0" />
+                  <MapPin className="text-[#D4AF37] shrink-0" />
                   <div>
                     <h4 className="font-ui font-bold text-[#1C1A14]">Location</h4>
                     <p className="text-[#424242] font-sans text-sm">P.O. Box 214,<br/>Dormaa Ahenkro, Ghana</p>
@@ -67,7 +67,7 @@ export default function ContactPage() {
                 </div>
                 
                 <div className="flex gap-4">
-                  <Phone className="text-[#C8960C] shrink-0" />
+                  <Phone className="text-[#D4AF37] shrink-0" />
                   <div>
                     <h4 className="font-ui font-bold text-[#1C1A14]">Phone & WhatsApp</h4>
                     <p className="text-[#424242] font-sans text-sm">+233 542 644 993<br/>+233 201 275 739</p>
@@ -75,7 +75,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex gap-4">
-                  <Mail className="text-[#C8960C] shrink-0" />
+                  <Mail className="text-[#D4AF37] shrink-0" />
                   <div>
                     <h4 className="font-ui font-bold text-[#1C1A14]">Email</h4>
                     <p className="text-[#424242] font-sans text-sm">info@aaiunityfarm.net</p>
@@ -83,7 +83,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex gap-4">
-                  <Clock className="text-[#C8960C] shrink-0" />
+                  <Clock className="text-[#D4AF37] shrink-0" />
                   <div>
                     <h4 className="font-ui font-bold text-[#1C1A14]">Working Hours</h4>
                     <p className="text-[#424242] font-sans text-sm">Mon - Fri: 7:00 AM - 6:00 PM<br/>Sat: 7:00 AM - 3:00 PM<br/>Sun: Closed</p>

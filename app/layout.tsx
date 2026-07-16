@@ -6,6 +6,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { AnnouncementBar } from '@/components/AnnouncementBar';
+import { ModernBackground } from '@/components/ModernBackground';
 
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -14,6 +15,9 @@ const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans' });
 export const metadata: Metadata = {
   title: 'AAI Unity Farms — Premium Poultry & Ghanaian Agricultural Products',
   description: 'Fresh eggs, poultry, and premium Ghanaian foods from AAI Unity Farms, Dormaa Ahenkro, Ghana. Local supply and international export to UK & EU.',
+  icons: {
+    icon: '/logo.png?v=2',
+  },
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
@@ -21,7 +25,8 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     <html lang="en" className={`${playfair.variable} ${inter.variable} ${dmSans.variable}`}>
       <body className="font-sans bg-[#FAFAFA] text-[#212121] antialiased" suppressHydrationWarning>
         <CartProvider>
-          <div className="flex flex-col min-h-screen">
+          <div className="flex flex-col min-h-screen relative">
+            <ModernBackground />
             <AnnouncementBar />
             <Navbar />
             <main className="flex-grow">{children}</main>
