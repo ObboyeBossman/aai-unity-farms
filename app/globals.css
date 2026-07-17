@@ -37,6 +37,29 @@
     font-family: var(--font-body);
   }
 
+  /* ── Browser Guard ──────────────────────────────────────────────
+     Disable text selection and image dragging site-wide.
+     Input/textarea fields are explicitly re-enabled below.       */
+  * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  input, textarea, [contenteditable] {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+
+  img {
+    pointer-events: none;
+    -webkit-user-drag: none;
+  }
+
   /* Shopify Contrast Rule:
      Large type is LIGHT (300-400) — commands presence without screaming.
      Small type is MEDIUM (500)    — readable without disappearing. */
