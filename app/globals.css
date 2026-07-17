@@ -410,17 +410,8 @@
   /* ── BACK ─────────────────────────── */
   .flip-card-back {
     transform: rotateY(180deg);
-    /* Shopify dark surface */
-    background-color: #0C0C0C;
+    background-color: var(--color-farm-surface-card);
     border: 1px solid rgba(212, 175, 55, 0.25);
-  }
-
-  /* Apply dark tokens only inside the back face */
-  .flip-card-back {
-    --color-farm-text: #F0F0ED;
-    --color-farm-text-muted: #8A9E8D;
-    --color-farm-border: rgba(255, 255, 255, 0.12);
-    --color-farm-surface-card: #161616;
   }
 
   .flip-back-inner {
@@ -463,7 +454,7 @@
     font-size: 18px;
     font-weight: 500;
     line-height: 1.25;
-    color: #F0F0ED;
+    color: var(--color-farm-text);
   }
 
   .flip-tagline {
@@ -496,7 +487,7 @@
     font-family: var(--font-body);
     font-size: 13px;
     font-weight: 500;
-    color: #8A9E8D;
+    color: var(--color-farm-text-muted);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-top: 4px;
@@ -506,7 +497,7 @@
   .flip-divider {
     width: 100%;
     height: 1px;
-    background: rgba(255, 255, 255, 0.10);
+    background: var(--color-farm-border);
     margin: 12px 0;
   }
 
@@ -515,7 +506,7 @@
     list-style: none;
     padding: 0;
     margin: 0 0 auto 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.10);
+    border-top: 1px solid var(--color-farm-border);
     flex: 1;
     overflow: hidden;
   }
@@ -525,7 +516,7 @@
     align-items: center;
     gap: 10px;
     padding: 9px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    border-bottom: 1px solid var(--color-farm-border);
     overflow: hidden;
   }
 
@@ -550,7 +541,7 @@
     display: inline-block;
     white-space: nowrap;
     font-size: 13px;
-    color: #F0F0ED;
+    color: var(--color-farm-text);
     line-height: 1;
     /* Start paused; animation begins after a short delay when flipped */
     animation: flip-marquee 8s linear infinite;
@@ -570,7 +561,7 @@
   /* Static (non-overflowing) feature text */
   .flip-feature-static {
     font-size: 13px;
-    color: #F0F0ED;
+    color: var(--color-farm-text);
     line-height: 1;
     white-space: nowrap;
     overflow: hidden;
