@@ -14,7 +14,7 @@ export function Navbar() {
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const { totalItems } = useCart();
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
@@ -80,11 +80,11 @@ export function Navbar() {
             <div className="flex items-center gap-6 border-l border-farm-border pl-6">
               {mounted && (
                 <button
-                  onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                  onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
                   className="p-2 text-farm-text-muted hover:text-farm-text hover:bg-farm-surface-card rounded-full transition-all active:scale-[0.97]"
                   aria-label="Toggle Dark Mode"
                 >
-                  {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                  {resolvedTheme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
                 </button>
               )}
               <Link href="/shop" className="relative p-2 text-farm-text hover:text-farm-gold transition-colors">
@@ -108,10 +108,10 @@ export function Navbar() {
           <div className="flex items-center gap-4 md:hidden">
             {mounted && (
               <button
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
                 className="p-2 text-farm-text-muted hover:text-farm-text transition-colors"
               >
-                {theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
+                {resolvedTheme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
               </button>
             )}
             <Link href="/shop" className="relative p-2 text-farm-text">
