@@ -297,7 +297,7 @@ export default function ShopPage() {
 
             {/* Product grid */}
             <AnimatePresence mode="popLayout">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-2 md:grid-cols-2 gap-3 sm:gap-8">
                 {filteredProducts.map((product, i) => (
                   <motion.div
                     layout
