@@ -324,6 +324,15 @@
     opacity: 0.6;
   }
 
+  /* Native <select> needs an explicit background — otherwise the browser
+     renders system-default chrome (white) even inside a dark-mode layout */
+  select.farm-input {
+    background-color: var(--color-farm-surface);
+    color: var(--color-farm-text);
+    /* Remove default arrow on some browsers so we can rely on browser default */
+    appearance: auto;
+  }
+
   .farm-input:focus {
     border-color: var(--color-farm-gold);
     box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);

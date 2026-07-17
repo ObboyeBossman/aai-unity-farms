@@ -30,22 +30,22 @@ export function AnnouncementBar() {
           transition={{ duration: 0.32, ease: shopifyEase }}
           className="overflow-hidden"
         >
-          <div className="bg-[#0D3B17] text-[#FFF8E1] px-6 py-2.5 flex items-center justify-between border-b border-white/10">
+          <div className="bg-farm-gold px-6 py-2.5 flex items-center justify-between border-b border-farm-gold/20">
             <div className="flex-1 text-center">
-              <span className="type-label text-[#FFF8E1]/80 tracking-wide">
+              <span className="type-label text-farm-surface/90 tracking-wide">
                 <span className="hidden sm:inline">Now exporting premium Ghanaian yams and agricultural commodities to the UK and EU.{' '}</span>
                 <span className="sm:hidden">UK/EU Export Programme now open.{' '}</span>
               </span>
               <Link
                 href="/export"
-                className="type-label text-farm-gold underline underline-offset-2 hover:text-[#FFF8E1] transition-colors duration-200 ml-1"
+                className="type-label text-farm-surface underline underline-offset-2 hover:text-farm-surface/70 transition-colors duration-200 ml-1"
               >
                 Learn more
               </Link>
             </div>
             <button
               onClick={dismiss}
-              className="p-1 ml-4 text-[#FFF8E1]/60 hover:text-[#FFF8E1] hover:bg-white/10 rounded-full transition-colors duration-200 shrink-0"
+              className="p-1 ml-4 text-farm-surface/60 hover:text-farm-surface hover:bg-farm-surface/10 rounded-full transition-colors duration-200 shrink-0"
               aria-label="Dismiss announcement"
             >
               <X size={14} />
