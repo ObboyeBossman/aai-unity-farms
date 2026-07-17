@@ -73,6 +73,16 @@
     letter-spacing: -0.03em;
   }
 
+  /* Stat counters — same as display but floors at 36px on mobile
+     so the 2-col grid doesn't overflow on small screens. */
+  .type-display-stat {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 9vw, 96px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
   /* HEADLINE — 40-56px, weight 400. Section opener. 2-5 words. */
   .type-headline {
     font-family: var(--font-display);

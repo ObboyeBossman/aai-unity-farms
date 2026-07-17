@@ -297,7 +297,7 @@ export default function Home() {
                   end={end}
                   suffix={suffix}
                   duration={duration}
-                  className="type-display text-farm-gold"
+                  className="type-display-stat text-farm-gold"
                 />
                 <span className="type-label text-farm-text-muted">{label}</span>
               </motion.div>
