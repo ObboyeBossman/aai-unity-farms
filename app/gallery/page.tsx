@@ -1,12 +1,11 @@
+'use client';
+
 import React from 'react';
-import { Metadata } from 'next';
 import Image from 'next/image';
 import { MEDIA } from '@/lib/media';
+import { motion } from 'motion/react';
 
-export const metadata: Metadata = {
-  title: 'Farm Gallery | AAI Unity Farms',
-  description: 'Photos of AAI Unity Farms — our poultry operations, fresh products, packaging, and export processes in Dormaa Ahenkro, Ghana.',
-};
+const shopifyEase = [0.2, 0, 0, 1] as const;
 
 export default function GalleryPage() {
   const photos = [
@@ -38,14 +37,39 @@ export default function GalleryPage() {
               key={index}
               className="relative h-64 md:h-80 rounded-xl overflow-hidden border border-farm-border group cursor-pointer"
             >
+              {/* Photo — zooms on hover */}
               <Image
                 src={src}
                 alt={`Farm gallery photo ${index + 1}`}
                 fill
-                className="object-cover group-hover:scale-110 transition-transform duration-700"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-farm-surface/0 group-hover:bg-farm-surface/20 transition-colors duration-300" />
+
+              {/* Glassmorphism overlay — fades in after zoom starts */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100
+                              backdrop-blur-md
+                              bg-white/[0.08]
+                              flex flex-col items-center justify-center gap-4">
+
+                {/* Logo */}
+                <motion.div
+                  className="relative w-16 h-16 drop-shadow-2xl"
+                  style={{ filter: 'drop-shadow(0 4px 24px rgba(212,175,55,0.35))' }}
+                >
+                  <Image
+                    src="/logo.png"
+                    alt="AAI Unity Farms"
+                    fill
+                    className="object-contain"
+                  />
+                </motion.div>
+
+                {/* Wordmark */}
+                <p className="type-label text-white/90 tracking-widest drop-shadow-md">
+                  AAI Unity Farms
+                </p>
+              </div>
             </div>
           ))}
         </div>
@@ -54,3 +78,4 @@ export default function GalleryPage() {
     </div>
   );
 }
+

@@ -28,7 +28,6 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
           <CartProvider>
             <div className="flex flex-col min-h-screen relative">
               <ModernBackground />
-              <AnnouncementBar />
               <Navbar />
               <main className="flex-grow">{children}</main>
               <Footer />
