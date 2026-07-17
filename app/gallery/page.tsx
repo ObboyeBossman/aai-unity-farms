@@ -16,9 +16,8 @@ export default function GalleryPage() {
     MEDIA.gallery04,
     MEDIA.gallery05,
     MEDIA.gallery06,
-    MEDIA.heroHome,
-    MEDIA.heroAbout,
-    MEDIA.heroProducts,
+    MEDIA.gallery07,
+    MEDIA.gallery08,
   ];
 
   return (
