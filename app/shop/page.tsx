@@ -1,12 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ShoppingBag, Plus, Minus, X, ArrowRight, MessageCircle } from 'lucide-react';
+import Link from 'next/link';
+import { ShoppingBag, Plus, Minus, X, ArrowRight, MessageCircle, ChevronRight } from 'lucide-react';
 import { products } from '@/lib/data';
 import { useCart } from '@/components/CartProvider';
 import { motion, AnimatePresence } from 'motion/react';
 import { FlipCard } from '@/components/FlipCard';
 import { CheckoutModal } from '@/components/CheckoutModal';
+import { AnnouncementBar } from '@/components/AnnouncementBar';
 
 const shopifyEase = [0.2, 0, 0, 1] as const;
 
@@ -228,8 +230,30 @@ export default function ShopPage() {
   };
 
   return (
-    <div className="pt-32 pb-32">
+    <div className="pt-[72px] pb-32">
+
+      {/* Announcement bar — sits flush under the fixed navbar */}
+      <AnnouncementBar />
+
       <div className="max-w-7xl mx-auto px-6">
+
+        {/* Breadcrumb */}
+        <motion.nav
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.28, ease: shopifyEase }}
+          aria-label="Breadcrumb"
+          className="flex items-center gap-1.5 mb-10 pt-4"
+        >
+          <Link
+            href="/"
+            className="type-label text-farm-text-muted hover:text-farm-gold transition-colors duration-200"
+          >
+            Home
+          </Link>
+          <ChevronRight size={13} className="text-farm-border shrink-0" />
+          <span className="type-label text-farm-gold">Shop</span>
+        </motion.nav>
 
         {/* Header */}
         <motion.div

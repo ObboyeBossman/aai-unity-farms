@@ -3,16 +3,16 @@
 import React, { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'motion/react';
+
+const shopifyEase = [0.2, 0, 0, 1] as const;
 
 export function AnnouncementBar() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const dismissed = sessionStorage.getItem('aai_announcement_dismissed');
-    if (!dismissed) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setIsVisible(true);
-    }
+    if (!dismissed) setIsVisible(true);
   }, []);
 
   const dismiss = () => {
@@ -20,24 +20,39 @@ export function AnnouncementBar() {
     setIsVisible(false);
   };
 
-  if (!isVisible) return null;
-
   return (
-    <div className="bg-[#0D3B17]/95 backdrop-blur-sm text-[#FFF8E1] px-4 py-2 flex items-center justify-between text-sm font-ui relative z-50 border-b border-white/10">
-      <div className="flex-1 text-center pr-8">
-        <span className="hidden sm:inline">Now exporting premium Ghanaian yams and agricultural commodities to the UK and EU. </span>
-        <span className="sm:hidden">UK/EU Export Programme now open. </span>
-        <Link href="/export" className="underline font-bold hover:text-white ml-1">
-          Learn more
-        </Link>
-      </div>
-      <button
-        onClick={dismiss}
-        className="p-1 hover:bg-[#1B5E20] rounded-full transition-colors flex-shrink-0"
-        aria-label="Dismiss announcement"
-      >
-        <X size={16} />
-      </button>
-    </div>
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.32, ease: shopifyEase }}
+          className="overflow-hidden"
+        >
+          <div className="bg-[#0D3B17] text-[#FFF8E1] px-6 py-2.5 flex items-center justify-between border-b border-white/10">
+            <div className="flex-1 text-center">
+              <span className="type-label text-[#FFF8E1]/80 tracking-wide">
+                <span className="hidden sm:inline">Now exporting premium Ghanaian yams and agricultural commodities to the UK and EU.{' '}</span>
+                <span className="sm:hidden">UK/EU Export Programme now open.{' '}</span>
+              </span>
+              <Link
+                href="/export"
+                className="type-label text-farm-gold underline underline-offset-2 hover:text-[#FFF8E1] transition-colors duration-200 ml-1"
+              >
+                Learn more
+              </Link>
+            </div>
+            <button
+              onClick={dismiss}
+              className="p-1 ml-4 text-[#FFF8E1]/60 hover:text-[#FFF8E1] hover:bg-white/10 rounded-full transition-colors duration-200 shrink-0"
+              aria-label="Dismiss announcement"
+            >
+              <X size={14} />
+            </button>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
