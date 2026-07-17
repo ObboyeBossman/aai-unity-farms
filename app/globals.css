@@ -625,10 +625,58 @@
     to   { opacity: 1; transform: translateX(0); }
   }
 
-  /* Mobile: taller card to fit content */
+  /* ── Mobile: replace 3D flip with 2D opacity/translate swap ──
+     Safari/WebKit on mobile has a known bug where preserve-3d
+     inside scroll containers breaks backface-visibility, causing
+     the back face to bleed through mirrored. We ditch the 3D
+     entirely on small screens and use a clean crossfade instead. */
   @media (max-width: 640px) {
     .flip-card-scene {
       height: 460px;
+    }
+
+    /* Kill all 3D transforms on mobile */
+    .flip-card-inner {
+      transform-style: flat;
+      transition: none;
+    }
+
+    .flip-card-inner.is-flipped {
+      transform: none;
+    }
+
+    /* Front: visible by default, fade+slide out when flipped */
+    .flip-card-front {
+      backface-visibility: visible;
+      -webkit-backface-visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.28s cubic-bezier(0.2,0,0,1),
+                  transform 0.28s cubic-bezier(0.2,0,0,1);
+      z-index: 2;
+    }
+
+    .flip-card-inner.is-flipped .flip-card-front {
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+    }
+
+    /* Back: hidden by default, fade+slide in when flipped */
+    .flip-card-back {
+      backface-visibility: visible;
+      -webkit-backface-visibility: visible;
+      transform: translateY(8px);
+      opacity: 0;
+      transition: opacity 0.28s cubic-bezier(0.2,0,0,1),
+                  transform 0.28s cubic-bezier(0.2,0,0,1);
+      z-index: 1;
+    }
+
+    .flip-card-inner.is-flipped .flip-card-back {
+      opacity: 1;
+      transform: translateY(0);
+      z-index: 3;
     }
   }
 }
