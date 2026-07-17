@@ -132,34 +132,67 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Nav */}
-      {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full glass-panel border-b border-farm-border">
-          <nav className="flex flex-col py-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`px-8 py-4 type-label border-b border-farm-border transition-colors ${
-                  pathname === link.href ? 'text-farm-gold' : 'text-farm-text-muted'
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-            <div className="px-8 py-6">
-              <Link
-                href="/quote"
-                onClick={() => setMobileMenuOpen(false)}
-                className="btn-primary w-full justify-center active:scale-[0.97]"
-              >
-                Request Quote
-              </Link>
+      {/* Mobile Drawer — left side, solid bg, with backdrop */}
+      {/* Backdrop */}
+      <div
+        onClick={() => setMobileMenuOpen(false)}
+        className={`md:hidden fixed inset-0 z-40 bg-black transition-opacity duration-300 ease-[cubic-bezier(0.2,0,0,1)] ${
+          mobileMenuOpen ? 'opacity-50 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      />
+
+      {/* Drawer panel */}
+      <div
+        className={`md:hidden fixed top-0 left-0 h-full w-72 z-50 flex flex-col
+          bg-farm-surface border-r border-farm-border shadow-2xl
+          transition-transform duration-300 ease-[cubic-bezier(0.2,0,0,1)]
+          ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
+      >
+        {/* Drawer header */}
+        <div className="flex items-center justify-between px-6 py-5 border-b border-farm-border">
+          <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-3">
+            <div className="relative h-8 w-8">
+              <Image src="/logo.png" alt="AAI Unity Farms Logo" fill className="object-contain" />
             </div>
-          </nav>
+            <span className="text-base font-display font-bold text-farm-text">AAI Unity Farms</span>
+          </Link>
+          <button
+            onClick={() => setMobileMenuOpen(false)}
+            className="p-2 text-farm-text-muted hover:text-farm-text transition-colors rounded-full hover:bg-farm-surface-card"
+          >
+            <X size={20} />
+          </button>
         </div>
-      )}
+
+        {/* Nav links */}
+        <nav className="flex flex-col flex-1 py-4 overflow-y-auto">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              onClick={() => setMobileMenuOpen(false)}
+              className={`px-6 py-4 type-label border-b border-farm-border transition-colors ${
+                pathname === link.href
+                  ? 'text-farm-gold bg-farm-surface-card'
+                  : 'text-farm-text-muted hover:text-farm-text hover:bg-farm-surface-card'
+              }`}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Drawer footer CTA */}
+        <div className="px-6 py-6 border-t border-farm-border">
+          <Link
+            href="/quote"
+            onClick={() => setMobileMenuOpen(false)}
+            className="btn-primary w-full justify-center active:scale-[0.97]"
+          >
+            Request Quote
+          </Link>
+        </div>
+      </div>
     </header>
   );
 }
