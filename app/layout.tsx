@@ -8,6 +8,7 @@ import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { AnnouncementBar } from '@/components/AnnouncementBar';
 import { ModernBackground } from '@/components/ModernBackground';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import { BrowserGuard } from '@/components/BrowserGuard';
 
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -26,6 +27,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       <body className="font-body bg-farm-surface text-farm-text antialiased transition-colors duration-300" suppressHydrationWarning>
         <ThemeProvider>
           <CartProvider>
+            <BrowserGuard />
             <div className="flex flex-col min-h-screen relative">
               <ModernBackground />
               <Navbar />
