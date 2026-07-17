@@ -6,96 +6,11 @@ import { products } from '@/lib/data';
 import { useCart } from '@/components/CartProvider';
 import { motion, AnimatePresence } from 'motion/react';
 import { FlipCard } from '@/components/FlipCard';
+import { CheckoutModal } from '@/components/CheckoutModal';
 
 const shopifyEase = [0.2, 0, 0, 1] as const;
 
 const categories = ['All', 'Eggs', 'Poultry', 'Feeds', 'Ghanaian Foods'] as const;
-
-/* ─── Mobile Cart Drawer ─────────────────────────────────────── */
-function MobileCartDrawer({
-  open,
-  onClose,
-}: {
-  open: boolean;
-  onClose: () => void;
-}) {
-  const { items, updateQuantity, clearCart, totalPrice } = useCart();
-  const [sent, setSent] = useState(false);
-
-  const handleCheckout = () => {
-    let message = `Hello AAI Unity Farms! I'd like to order:\n\n`;
-    items.forEach(item => {
-      const priceStr = item.price
-        ? `(GHS ${(item.price * item.quantity).toLocaleString()})`
-        : `(Price TBA)`;
-      message += `- ${item.quantity}x ${item.name} ${priceStr}\n`;
-    });
-    if (totalPrice > 0) message += `\nTotal: GHS ${totalPrice.toLocaleString()}`;
-    message += `\n\nPlease confirm my order.`;
-    window.open(`https://wa.me/233542644993?text=${encodeURIComponent(message)}`, '_blank');
-    setSent(true);
-    setTimeout(() => {
-      clearCart();
-      setSent(false);
-      onClose();
-    }, 1800);
-  };
-
-  return (
-    <AnimatePresence>
-      {open && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/40 z-50 lg:hidden"
-            onClick={onClose}
-          />
-          {/* Drawer */}
-          <motion.div
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '100%' }}
-            transition={{ duration: 0.34, ease: shopifyEase }}
-            className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-farm-surface-card border-t border-farm-border rounded-t-2xl max-h-[80vh] flex flex-col"
-          >
-            {/* Handle */}
-            <div className="flex justify-center pt-3 pb-1">
-              <div className="w-10 h-1 rounded-full bg-farm-border" />
-            </div>
-
-            {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-farm-border">
-              <h2 className="type-title text-farm-text flex items-center gap-2">
-                <ShoppingBag size={20} className="text-farm-gold" />
-                Your Order
-              </h2>
-              <button
-                onClick={onClose}
-                className="p-1 text-farm-text-muted hover:text-farm-text transition-colors"
-              >
-                <X size={20} />
-              </button>
-            </div>
-
-            {/* Body */}
-            <CartBody
-              items={items}
-              updateQuantity={updateQuantity}
-              clearCart={clearCart}
-              totalPrice={totalPrice}
-              onCheckout={handleCheckout}
-              sent={sent}
-            />
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
-  );
-}
 
 /* ─── Shared Cart Body ───────────────────────────────────────── */
 function CartBody({
@@ -104,14 +19,12 @@ function CartBody({
   clearCart,
   totalPrice,
   onCheckout,
-  sent,
 }: {
   items: ReturnType<typeof useCart>['items'];
   updateQuantity: (id: string, q: number) => void;
   clearCart: () => void;
   totalPrice: number;
   onCheckout: () => void;
-  sent: boolean;
 }) {
   if (items.length === 0) {
     return (
@@ -142,9 +55,9 @@ function CartBody({
           {items.map(item => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, height: 0, marginBottom: 0 }}
-              animate={{ opacity: 1, height: 'auto', marginBottom: 16 }}
-              exit={{ opacity: 0, height: 0, marginBottom: 0 }}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25, ease: shopifyEase }}
               className="flex items-center gap-4"
             >
@@ -158,13 +71,10 @@ function CartBody({
                     : 'Price on request'}
                 </p>
               </div>
-
-              {/* Quantity stepper */}
               <div className="flex items-center gap-2 bg-farm-surface rounded-full px-2 py-1.5 border border-farm-border shrink-0">
                 <button
                   onClick={() => updateQuantity(item.id, item.quantity - 1)}
                   className="w-6 h-6 flex items-center justify-center text-farm-text-muted hover:text-farm-gold transition-colors active:scale-[0.97]"
-                  aria-label="Decrease quantity"
                 >
                   <Minus size={13} />
                 </button>
@@ -174,7 +84,6 @@ function CartBody({
                 <button
                   onClick={() => updateQuantity(item.id, item.quantity + 1)}
                   className="w-6 h-6 flex items-center justify-center text-farm-text-muted hover:text-farm-gold transition-colors active:scale-[0.97]"
-                  aria-label="Increase quantity"
                 >
                   <Plus size={13} />
                 </button>
@@ -186,14 +95,11 @@ function CartBody({
 
       {/* Footer */}
       <div className="border-t border-farm-border px-6 pt-5 pb-6 space-y-4 shrink-0">
-        {/* Total row */}
         <div className="flex items-baseline justify-between">
           <div>
             <span className="type-label text-farm-text-muted">Order Total</span>
             {hasPriceless && (
-              <p className="type-micro text-farm-text-muted mt-0.5">
-                *Some items priced on request
-              </p>
+              <p className="type-micro text-farm-text-muted mt-0.5">*Some items priced on request</p>
             )}
           </div>
           <span className="font-display font-light text-3xl text-farm-text">
@@ -201,27 +107,13 @@ function CartBody({
           </span>
         </div>
 
-        {/* WhatsApp CTA */}
         <button
           onClick={onCheckout}
-          disabled={sent}
-          className="w-full btn-primary justify-center transition-all"
-          style={sent ? { backgroundColor: '#25D366' } : { backgroundColor: '#25D366', color: '#fff' }}
+          className="w-full btn-primary justify-center gap-2"
+          style={{ backgroundColor: '#25D366', color: '#fff' }}
         >
-          {sent ? (
-            <motion.span
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="flex items-center gap-2"
-            >
-              ✓ Opening WhatsApp…
-            </motion.span>
-          ) : (
-            <>
-              <MessageCircle size={16} />
-              Checkout via WhatsApp
-            </>
-          )}
+          <MessageCircle size={16} />
+          Review & Checkout
         </button>
 
         <button
@@ -235,41 +127,111 @@ function CartBody({
   );
 }
 
+/* ─── Mobile Cart Drawer ─────────────────────────────────────── */
+function MobileCartDrawer({
+  open,
+  onClose,
+  onCheckout,
+}: {
+  open: boolean;
+  onClose: () => void;
+  onCheckout: () => void;
+}) {
+  const { items, updateQuantity, clearCart, totalPrice } = useCart();
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/40 z-50 lg:hidden"
+            onClick={onClose}
+          />
+          <motion.div
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            transition={{ duration: 0.34, ease: shopifyEase }}
+            className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-farm-surface-card border-t border-farm-border rounded-t-2xl max-h-[82vh] flex flex-col"
+          >
+            <div className="flex justify-center pt-3 pb-1">
+              <div className="w-10 h-1 rounded-full bg-farm-border" />
+            </div>
+            <div className="flex items-center justify-between px-6 py-4 border-b border-farm-border">
+              <h2 className="type-title text-farm-text flex items-center gap-2">
+                <ShoppingBag size={20} className="text-farm-gold" /> Your Order
+              </h2>
+              <button onClick={onClose} className="p-1 text-farm-text-muted hover:text-farm-text transition-colors">
+                <X size={20} />
+              </button>
+            </div>
+            <CartBody
+              items={items}
+              updateQuantity={updateQuantity}
+              clearCart={clearCart}
+              totalPrice={totalPrice}
+              onCheckout={() => { onClose(); setTimeout(onCheckout, 200); }}
+            />
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
 /* ─── Page ───────────────────────────────────────────────────── */
 export default function ShopPage() {
   const { items, updateQuantity, clearCart, totalPrice, totalItems } = useCart();
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [sent, setSent] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
 
   const filteredProducts =
     activeCategory === 'All'
       ? products
       : products.filter(p => p.category === activeCategory);
 
-  const handleCheckout = () => {
-    let message = `Hello AAI Unity Farms! I'd like to order:\n\n`;
+  // Structured WhatsApp message with order ref
+  const handleConfirmCheckout = (note: string, ref: string) => {
+    const lines: string[] = [];
+    lines.push(`*AAI Unity Farms — Order ${ref}*`);
+    lines.push('');
+    lines.push('*Items:*');
     items.forEach(item => {
-      const priceStr = item.price
-        ? `(GHS ${(item.price * item.quantity).toLocaleString()})`
-        : `(Price TBA)`;
-      message += `- ${item.quantity}x ${item.name} ${priceStr}\n`;
+      const price = item.price
+        ? `GHS ${(item.price * item.quantity).toLocaleString()} (${item.quantity} × GHS ${item.price})`
+        : 'Price on request';
+      lines.push(`  • ${item.name} — ${price}`);
     });
-    if (totalPrice > 0) message += `\nTotal: GHS ${totalPrice.toLocaleString()}`;
-    message += `\n\nPlease confirm my order.`;
-    window.open(`https://wa.me/233542644993?text=${encodeURIComponent(message)}`, '_blank');
-    setSent(true);
-    setTimeout(() => {
-      clearCart();
-      setSent(false);
-    }, 1800);
+    lines.push('');
+    if (totalPrice > 0) {
+      lines.push(`*Subtotal:* GHS ${totalPrice.toLocaleString()}`);
+    }
+    if (note.trim()) {
+      lines.push('');
+      lines.push(`*Delivery note:* ${note.trim()}`);
+    }
+    lines.push('');
+    lines.push('Please confirm availability and delivery details. Thank you!');
+
+    window.open(
+      `https://wa.me/233542644993?text=${encodeURIComponent(lines.join('\n'))}`,
+      '_blank'
+    );
+
+    // Clear cart after short delay so confirmation screen shows first
+    setTimeout(() => clearCart(), 800);
   };
 
   return (
     <div className="pt-32 pb-32">
       <div className="max-w-7xl mx-auto px-6">
 
-        {/* ── Header ── */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -285,9 +247,8 @@ export default function ShopPage() {
 
         <div className="flex flex-col lg:flex-row gap-16 items-start">
 
-          {/* ── Products column ── */}
+          {/* Products column */}
           <div className="flex-1 min-w-0">
-
             {/* Category filter */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -320,30 +281,16 @@ export default function ShopPage() {
                     initial={{ opacity: 0, scale: 0.96, y: 16 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.96 }}
-                    transition={{
-                      duration: 0.3,
-                      delay: Math.min(i, 5) * 0.04,
-                      ease: shopifyEase,
-                    }}
+                    transition={{ duration: 0.3, delay: Math.min(i, 5) * 0.04, ease: shopifyEase }}
                   >
                     <FlipCard product={product} mode="shop" />
                   </motion.div>
                 ))}
               </div>
             </AnimatePresence>
-
-            {filteredProducts.length === 0 && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-center py-20"
-              >
-                <p className="type-body text-farm-text-muted">No products in this category.</p>
-              </motion.div>
-            )}
           </div>
 
-          {/* ── Desktop Cart Sidebar ── */}
+          {/* Desktop Cart Sidebar */}
           <motion.aside
             initial={{ opacity: 0, x: 12 }}
             animate={{ opacity: 1, x: 0 }}
@@ -365,15 +312,14 @@ export default function ShopPage() {
                 updateQuantity={updateQuantity}
                 clearCart={clearCart}
                 totalPrice={totalPrice}
-                onCheckout={handleCheckout}
-                sent={sent}
+                onCheckout={() => setCheckoutOpen(true)}
               />
             </div>
           </motion.aside>
         </div>
       </div>
 
-      {/* ── Mobile Sticky Cart Bar ── */}
+      {/* Mobile sticky bar */}
       <AnimatePresence>
         {totalItems > 0 && (
           <motion.div
@@ -402,8 +348,21 @@ export default function ShopPage() {
         )}
       </AnimatePresence>
 
-      {/* Mobile Cart Drawer */}
-      <MobileCartDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      {/* Mobile drawer */}
+      <MobileCartDrawer
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        onCheckout={() => setCheckoutOpen(true)}
+      />
+
+      {/* Checkout review modal */}
+      <CheckoutModal
+        open={checkoutOpen}
+        onClose={() => setCheckoutOpen(false)}
+        items={items}
+        totalPrice={totalPrice}
+        onConfirm={handleConfirmCheckout}
+      />
     </div>
   );
 }

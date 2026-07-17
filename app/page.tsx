@@ -7,6 +7,7 @@ import { ArrowRight, ShieldCheck, Leaf, Globe, CheckCircle2 } from 'lucide-react
 import { motion } from 'motion/react';
 import { MEDIA } from '@/lib/media';
 import { StatCounter } from '@/components/StatCounter';
+import { NewsletterSignup } from '@/components/NewsletterSignup';
 
 // Shopify ease: fast out, gentle settle
 const shopifyEase = [0.2, 0, 0, 1] as const;
@@ -305,6 +306,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+          NEWSLETTER
+          ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+      <NewsletterSignup variant="section" />
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
           CTA — One primary action. Never buried.
