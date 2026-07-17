@@ -335,6 +335,288 @@
       transition-duration: 0.01ms !important;
     }
   }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     FLIP CARD — Shopify-style 3D reveal
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /* Scene — perspective wrapper */
+  .flip-card-scene {
+    perspective: 1000px;
+    width: 100%;
+    height: 420px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  /* Inner — the rotating element */
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(0.2, 0, 0, 1);
+    border-radius: 16px;
+  }
+
+  .flip-card-inner.is-flipped {
+    transform: rotateY(-180deg);
+  }
+
+  /* Shared face styles */
+  .flip-card-face {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* ── FRONT ────────────────────────── */
+  .flip-card-front {
+    border: 1px solid var(--color-farm-border);
+  }
+
+  /* Category pill overlaid on front */
+  .flip-front-pill {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: color-mix(in srgb, var(--color-farm-surface-card) 80%, transparent);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-farm-border);
+    padding: 4px 12px;
+    border-radius: 999px;
+    z-index: 10;
+  }
+
+  /* Hover hint */
+  .flip-front-hint {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    z-index: 10;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  .flip-card-scene:hover .flip-front-hint {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── BACK ─────────────────────────── */
+  .flip-card-back {
+    transform: rotateY(180deg);
+    /* Shopify dark surface */
+    background-color: #0C0C0C;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+  }
+
+  /* Apply dark tokens only inside the back face */
+  .flip-card-back {
+    --color-farm-text: #F0F0ED;
+    --color-farm-text-muted: #8A9E8D;
+    --color-farm-border: rgba(255, 255, 255, 0.12);
+    --color-farm-surface-card: #161616;
+  }
+
+  .flip-back-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Subtle gold glow in top-right corner */
+  .flip-card-back::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.15), transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Header row: name left, price right */
+  .flip-back-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .flip-back-header .eyebrow {
+    color: var(--color-farm-gold);
+    margin-bottom: 2px;
+  }
+
+  .flip-back-title {
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.25;
+    color: #F0F0ED;
+  }
+
+  .flip-tagline {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-farm-gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .flip-price-block {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .flip-price-num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--color-farm-gold);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .flip-price-contact {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    color: #8A9E8D;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  /* Divider line */
+  .flip-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.10);
+    margin: 12px 0;
+  }
+
+  /* Feature list */
+  .flip-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 auto 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .flip-feature-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    overflow: hidden;
+  }
+
+  .flip-feature-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--color-farm-gold);
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  /* Marquee (scrolling text) for overflowing features */
+  .flip-marquee-wrap {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    /* Only animate when card is flipped (parent has .is-flipped) */
+  }
+
+  .flip-marquee-inner {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 13px;
+    color: #F0F0ED;
+    line-height: 1;
+    /* Start paused; animation begins after a short delay when flipped */
+    animation: flip-marquee 8s linear infinite;
+    animation-play-state: paused;
+  }
+
+  /* Only scroll when card is actually flipped */
+  .flip-card-inner.is-flipped .flip-marquee-inner {
+    animation-play-state: running;
+  }
+
+  @keyframes flip-marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Static (non-overflowing) feature text */
+  .flip-feature-static {
+    font-size: 13px;
+    color: #F0F0ED;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* CTAs row */
+  .flip-ctas {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .flip-ctas .btn-primary,
+  .flip-ctas .btn-secondary {
+    flex: 1;
+    min-width: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 13px;
+    gap: 6px;
+  }
+
+  /* Stagger entrance of feature rows on flip */
+  .flip-card-inner.is-flipped .flip-feature-row {
+    animation: flip-row-in 0.3s cubic-bezier(0.2, 0, 0, 1) both;
+  }
+
+  .flip-card-inner.is-flipped .flip-feature-row:nth-child(1) { animation-delay: 0.05s; }
+  .flip-card-inner.is-flipped .flip-feature-row:nth-child(2) { animation-delay: 0.10s; }
+  .flip-card-inner.is-flipped .flip-feature-row:nth-child(3) { animation-delay: 0.15s; }
+  .flip-card-inner.is-flipped .flip-feature-row:nth-child(4) { animation-delay: 0.20s; }
+  .flip-card-inner.is-flipped .flip-feature-row:nth-child(5) { animation-delay: 0.25s; }
+
+  @keyframes flip-row-in {
+    from { opacity: 0; transform: translateX(-8px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Mobile: taller card to fit content */
+  @media (max-width: 640px) {
+    .flip-card-scene {
+      height: 460px;
+    }
+  }
 }
 
 
