@@ -23,7 +23,7 @@ export const MEDIA = {
   soybeans: '/images/products/Soybeans.jpg',
 
   // Gallery
-  gallery01: '/images/gallery/gallery1.jpg',
+  gallery01: '/images/gallery/farm-operations.jpg',
   gallery02: '/images/gallery/gallery2.jpg',
   gallery03: '/images/gallery/gallery3.jpg',
   gallery04: '/images/gallery/gallery4.jpeg',
