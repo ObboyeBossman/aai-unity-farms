@@ -219,8 +219,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               {
-                image: MEDIA.freshEggs,
-                alt: 'Local Poultry',
+                video: '/videos/local-market.mp4',
                 title: 'Local Market',
                 body: 'Farm-fresh eggs, live and dressed broiler chickens, day-old chicks, and premium poultry feed for the Ghanaian market.',
                 cta: 'View Local Catalogue',
@@ -229,8 +228,7 @@ export default function Home() {
                 delay: 0,
               },
               {
-                image: MEDIA.ghanaianYam,
-                alt: 'Export Commodities',
+                video: '/videos/import-export.mp4',
                 title: 'Global Export',
                 body: 'Premium Ghanaian yams, sweet corn, and soybeans exported to wholesale buyers and importers in the UK and European Union.',
                 cta: 'View Export Services',
@@ -238,7 +236,7 @@ export default function Home() {
                 variant: 'primary',
                 delay: 0.04,
               },
-            ].map(({ image, alt, title, body, cta, href, variant, delay }) => (
+            ].map(({ video, title, body, cta, href, variant, delay }) => (
               <motion.div
                 key={title}
                 initial={{ opacity: 0, y: 16 }}
@@ -248,12 +246,13 @@ export default function Home() {
                 className="golden-hour-card flex flex-col group"
               >
                 <div className="h-72 relative overflow-hidden">
-                  <Image
-                    src={image}
-                    alt={alt}
-                    fill
-                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-                    referrerPolicy="no-referrer"
+                  <video
+                    src={video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-farm-surface/80 via-farm-surface/20 to-transparent" />
                   <h3 className="type-title absolute bottom-6 left-6 text-farm-text">{title}</h3>

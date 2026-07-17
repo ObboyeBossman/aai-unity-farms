@@ -3,7 +3,7 @@ export const MEDIA = {
   heroHome: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1920&auto=format&fit=crop',
   heroAbout: 'https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?q=80&w=1920&auto=format&fit=crop',
   heroExport: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1920&auto=format&fit=crop',
-  heroProducts: 'https://images.unsplash.com/photo-1464226184884-fa280b67c3ff?q=80&w=1920&auto=format&fit=crop',
+  heroProducts: '/images/hero-products.jpg',
   heroContact: 'https://images.unsplash.com/photo-1534536281715-e28d76689b4d?q=80&w=1920&auto=format&fit=crop',
 
   // Products - Local Images
