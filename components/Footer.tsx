@@ -1,4 +1,5 @@
 import React from 'react';
+import { NewsletterSignup } from './NewsletterSignup';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
@@ -81,23 +82,26 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Hours */}
-          <div>
-            <h3 className="font-body font-bold text-base mb-6 text-farm-text">Working Hours</h3>
-            <ul className="flex flex-col gap-4 text-sm text-farm-text-muted">
-              <li className="flex justify-between">
-                <span>Mon - Fri:</span>
-                <span className="text-farm-text">7:00 AM - 6:00 PM</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Saturday:</span>
-                <span className="text-farm-text">7:00 AM - 3:00 PM</span>
-              </li>
-              <li className="flex justify-between text-farm-text-muted/50">
-                <span>Sunday:</span>
-                <span>Closed</span>
-              </li>
-            </ul>
+          {/* Hours + Newsletter */}
+          <div className="flex flex-col gap-8">
+            <div>
+              <h3 className="font-body font-bold text-base mb-6 text-farm-text">Working Hours</h3>
+              <ul className="flex flex-col gap-4 text-sm text-farm-text-muted">
+                <li className="flex justify-between">
+                  <span>Mon - Fri:</span>
+                  <span className="text-farm-text">7:00 AM - 6:00 PM</span>
+                </li>
+                <li className="flex justify-between">
+                  <span>Saturday:</span>
+                  <span className="text-farm-text">7:00 AM - 3:00 PM</span>
+                </li>
+                <li className="flex justify-between text-farm-text-muted/50">
+                  <span>Sunday:</span>
+                  <span>Closed</span>
+                </li>
+              </ul>
+            </div>
+            <NewsletterSignup variant="footer" />
           </div>
         </div>
 
