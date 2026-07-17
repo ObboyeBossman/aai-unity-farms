@@ -2,10 +2,12 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { ShoppingBag } from 'lucide-react';
+import { ShoppingBag, Plus, Minus } from 'lucide-react';
 import { products, Product } from '@/lib/data';
 import { useCart } from '@/components/CartProvider';
+import { motion, AnimatePresence } from 'motion/react';
+
+const shopifyEase = [0.2, 0, 0, 1] as const;
 
 export default function ShopPage() {
   const { addItem, items, updateQuantity, removeItem, totalPrice, clearCart } = useCart();
@@ -32,116 +34,194 @@ export default function ShopPage() {
   };
 
   return (
-    <div className="pt-28 pb-20 min-h-screen relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="pt-32 pb-32">
+      <div className="max-w-7xl mx-auto px-6">
         
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-display font-bold text-[#1C1A14] mb-4">Farm Shop</h1>
-          <p className="text-[#424242] font-sans text-lg">Order fresh produce directly from our farm. Checkout via WhatsApp.</p>
-        </div>
+        {/* Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.34, ease: shopifyEase }}
+          className="text-center mb-16 flex flex-col items-center"
+        >
+          <span className="eyebrow">Direct from Farm</span>
+          {/* DISPLAY — weight 300 */}
+          <h1 className="type-display text-farm-text mb-6">Farm Shop</h1>
+          {/* BODY */}
+          <p className="type-body text-farm-text-muted mx-auto">
+            Order fresh produce directly from our farm.
+          </p>
+        </motion.div>
 
-        <div className="flex flex-col lg:flex-row gap-12">
+        <div className="flex flex-col lg:flex-row gap-16 items-start">
           {/* Main Shop Area */}
           <div className="flex-1">
             {/* Category Filter */}
-            <div className="flex flex-wrap gap-2 mb-8">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4, delay: 0.1, ease: shopifyEase }}
+              className="flex flex-wrap gap-3 mb-12"
+            >
               {categories.map(cat => (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 rounded-full font-ui text-sm font-medium transition-colors ${
+                  className={`type-label px-5 py-2.5 rounded-full transition-colors active:scale-[0.97] ${
                     activeCategory === cat 
-                      ? 'bg-[#0D3B17] text-white'
-                      : 'bg-white text-[#424242] border border-gray-200 hover:border-[#0D3B17]'
+                      ? 'bg-farm-gold text-farm-surface'
+                      : 'bg-transparent text-farm-text-muted border border-farm-border hover:text-farm-text hover:border-farm-gold/50'
                   }`}
                 >
                   {cat}
                 </button>
               ))}
-            </div>
+            </motion.div>
 
             {/* Product Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredProducts.map(product => (
-                <div key={product.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
-                  <div className="relative h-48">
-                    <Image src={product.image} alt={product.name} fill className="object-cover" referrerPolicy="no-referrer" />
-                    <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-xs font-ui font-bold text-[#0D3B17]">
-                      {product.category}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <AnimatePresence mode="popLayout">
+                {filteredProducts.map((product, i) => (
+                  <motion.div 
+                    layout
+                    initial={{ opacity: 0, scale: 0.96, y: 16 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.3, delay: Math.min(i, 6) * 0.04, ease: shopifyEase }}
+                    key={product.id} 
+                    className="golden-hour-card flex flex-col group"
+                  >
+                    <div className="relative h-64 overflow-hidden bg-farm-surface">
+                      <Image 
+                        src={product.image} 
+                        alt={product.name} 
+                        fill 
+                        className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]" 
+                        referrerPolicy="no-referrer" 
+                      />
+                      <div className="absolute top-4 left-4 glass-panel px-3 py-1.5 rounded-full">
+                        {/* LABEL */}
+                        <span className="type-label text-farm-gold">{product.category}</span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-5 flex flex-col h-[calc(100%-12rem)]">
-                    <h3 className="font-ui font-bold text-lg text-[#1C1A14] mb-1">{product.name}</h3>
-                    <div className="text-[#2E7D32] font-display font-bold text-xl mb-4 mt-auto">
-                      {product.price ? `GHS ${product.price}` : 'Contact for Price'}
-                      <span className="text-[#757575] font-sans text-sm font-normal ml-1">/ {product.unit}</span>
+                    <div className="p-8 flex flex-col flex-grow z-10 relative">
+                      {/* TITLE */}
+                      <h3 className="type-title text-farm-text mb-2">{product.name}</h3>
+                      
+                      <div className="flex items-baseline gap-2 mb-8 mt-auto">
+                        {product.price ? (
+                          <>
+                            <span className="font-display font-light text-4xl text-farm-text">
+                              GHS {product.price}
+                            </span>
+                            <span className="type-micro text-farm-text-muted">/ {product.unit}</span>
+                          </>
+                        ) : (
+                          <span className="font-display font-light text-2xl text-farm-text">
+                            Contact for Price
+                          </span>
+                        )}
+                      </div>
+                      
+                      <button
+                        onClick={() => addItem({ id: product.id, name: product.name, price: product.price, quantity: 1 })}
+                        className="btn-secondary w-full"
+                      >
+                        <ShoppingBag size={18} /> Add to Order
+                      </button>
                     </div>
-                    
-                    <button
-                      onClick={() => addItem({ id: product.id, name: product.name, price: product.price, quantity: 1 })}
-                      className="w-full py-2 bg-[#F1F8E9] text-[#0D3B17] hover:bg-[#C8E6C9] font-ui font-bold rounded flex items-center justify-center gap-2 transition-colors"
-                    >
-                      <ShoppingBag size={18} /> Add to Order
-                    </button>
-                  </div>
-                </div>
-              ))}
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
           </div>
 
           {/* Cart Sidebar */}
-          <div className="w-full lg:w-80 shrink-0">
-            <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6 sticky top-28">
-              <h2 className="text-xl font-display font-bold text-[#1C1A14] mb-4 pb-4 border-b border-gray-100 flex items-center gap-2">
-                <ShoppingBag size={20} className="text-[#D4AF37]" /> Your Order
+          <motion.div 
+            initial={{ opacity: 0, x: 12 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.34, delay: 0.2, ease: shopifyEase }}
+            className="w-full lg:w-[400px] shrink-0 sticky top-32"
+          >
+            <div className="glass-panel rounded-2xl p-8 flex flex-col h-full border border-farm-border">
+              <h2 className="type-title text-farm-text mb-6 flex items-center gap-3 border-b border-farm-border pb-6">
+                <ShoppingBag size={24} className="text-farm-gold" /> 
+                Your Order
               </h2>
 
               {items.length === 0 ? (
-                <div className="text-center py-8 text-[#757575]">
-                  <p className="font-sans mb-4">Your order is empty.</p>
+                <div className="text-center py-12 flex flex-col items-center">
+                  <div className="w-16 h-16 rounded-full bg-farm-surface-card border border-farm-border flex items-center justify-center mb-4">
+                    <ShoppingBag size={24} className="text-farm-text-muted opacity-50" />
+                  </div>
+                  <p className="type-body text-farm-text-muted">Your order is empty.</p>
                 </div>
               ) : (
                 <>
-                  <div className="space-y-4 max-h-[40vh] overflow-y-auto mb-6 pr-2">
-                    {items.map(item => (
-                      <div key={item.id} className="flex justify-between items-start text-sm font-sans">
-                        <div className="flex-1 pr-4">
-                          <p className="font-bold text-[#1C1A14]">{item.name}</p>
-                          <p className="text-[#757575]">{item.price ? `GHS ${item.price}` : 'Price TBA'}</p>
-                        </div>
-                        <div className="flex items-center gap-2 bg-[#F5F5F5] rounded p-1">
-                          <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="w-6 h-6 flex items-center justify-center hover:bg-white rounded text-[#424242]">-</button>
-                          <span className="w-4 text-center font-bold">{item.quantity}</span>
-                          <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="w-6 h-6 flex items-center justify-center hover:bg-white rounded text-[#424242]">+</button>
-                        </div>
-                      </div>
-                    ))}
+                  <div className="space-y-6 max-h-[50vh] overflow-y-auto mb-8 pr-2">
+                    <AnimatePresence>
+                      {items.map(item => (
+                        <motion.div 
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          key={item.id} 
+                          className="flex justify-between items-center"
+                        >
+                          <div className="flex-1 pr-4">
+                            {/* TITLE style but smaller */}
+                            <p className="type-body font-medium text-farm-text leading-tight mb-1">{item.name}</p>
+                            <p className="type-micro text-farm-text-muted">
+                              {item.price ? `GHS ${item.price}` : 'Price TBA'}
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-3 bg-farm-surface rounded-full px-2 py-1 border border-farm-border">
+                            <button 
+                              onClick={() => updateQuantity(item.id, item.quantity - 1)} 
+                              className="w-6 h-6 flex items-center justify-center hover:text-farm-gold transition-colors text-farm-text-muted active:scale-[0.97]"
+                            >
+                              <Minus size={14} />
+                            </button>
+                            <span className="w-4 text-center type-label text-farm-text">{item.quantity}</span>
+                            <button 
+                              onClick={() => updateQuantity(item.id, item.quantity + 1)} 
+                              className="w-6 h-6 flex items-center justify-center hover:text-farm-gold transition-colors text-farm-text-muted active:scale-[0.97]"
+                            >
+                              <Plus size={14} />
+                            </button>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </AnimatePresence>
                   </div>
                   
-                  <div className="border-t border-gray-100 pt-4 mb-6">
-                    <div className="flex justify-between items-center font-ui font-bold text-lg text-[#1C1A14]">
-                      <span>Total:</span>
-                      <span>GHS {totalPrice}</span>
+                  <div className="border-t border-farm-border pt-6 mb-8 mt-auto">
+                    <div className="flex justify-between items-baseline mb-2">
+                      <span className="type-body text-farm-text-muted">Total</span>
+                      <span className="font-display font-light text-3xl text-farm-text">
+                        GHS {totalPrice}
+                      </span>
                     </div>
-                    <p className="text-xs text-[#757575] mt-1">*Excludes items without fixed pricing</p>
+                    <p className="type-micro text-farm-text-muted">*Excludes items without fixed pricing</p>
                   </div>
 
                   <button
                     onClick={handleCheckout}
-                    className="w-full py-3 bg-[#25D366] hover:bg-[#20bd5a] text-white font-ui font-bold rounded-lg transition-colors flex items-center justify-center gap-2"
+                    className="btn-primary w-full"
+                    style={{ backgroundColor: '#25D366', color: '#FFFFFF' }} // WhatsApp Green
                   >
                     Checkout via WhatsApp
                   </button>
                   <button
                     onClick={clearCart}
-                    className="w-full py-2 mt-2 text-[#757575] text-sm hover:text-[#1C1A14] transition-colors"
+                    className="w-full py-4 mt-2 type-label text-farm-text-muted hover:text-farm-text transition-colors active:scale-[0.97]"
                   >
                     Clear Cart
                   </button>
                 </>
               )}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

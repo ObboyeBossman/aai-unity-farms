@@ -16,68 +16,100 @@ export default function ProductsPage() {
   const localProducts = products.filter(p => p.category !== 'Ghanaian Foods');
 
   return (
-    <div className="pt-20 relative">
-      <div className="relative z-10">
-      {/* Hero Section */}
-      <section className="relative h-[300px] flex items-center justify-center">
+    <div className="pt-24 relative">
+      {/* Hero */}
+      <section className="relative h-[360px] flex items-center justify-center border-b border-farm-border">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[#1B5E20]/90 z-10" />
-          <Image src={MEDIA.heroProducts} alt="Our Products" fill className="object-cover" priority referrerPolicy="no-referrer" />
+          <div className="absolute inset-0 bg-farm-surface/45 z-10" />
+          <Image
+            src={MEDIA.heroProducts}
+            alt="Our Products"
+            fill
+            className="object-cover"
+            priority
+            referrerPolicy="no-referrer"
+          />
         </div>
-        <div className="relative z-20 text-center text-white px-4">
-          <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">Our Products</h1>
-          <p className="font-ui text-lg text-[#C8E6C9] max-w-2xl mx-auto">
-            Fresh, high-quality poultry and farm products for the local market.
-          </p>
+        <div className="relative z-20 text-center px-6 flex flex-col items-center">
+          <span className="eyebrow">Local Supply Catalogue</span>
+          {/* DISPLAY — one per screen */}
+          <h1 className="type-display text-farm-text">Our Products</h1>
         </div>
       </section>
 
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-display font-bold text-[#1C1A14]">Local Supply Catalogue</h2>
-            <p className="text-[#757575] mt-2 font-sans">Prices subject to change. Contact us for bulk orders.</p>
+      {/* Products Grid
+          SIGNATURE MOVE: Cards stagger in 40ms apart (Shopify stagger rule)
+          Handled by AnimatedGrid */}
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            {/* HEADLINE — section opener, 2-5 words */}
+            <h2 className="type-headline text-farm-text mb-4">Fresh. Reliable. Local.</h2>
+            {/* BODY — supporting text */}
+            <p className="type-body text-farm-text-muted mx-auto">
+              Prices subject to change. Contact us for bulk orders.
+            </p>
           </div>
 
           <AnimatedGrid>
             {localProducts.map(product => (
-              <div key={product.id} className="glass-panel rounded-xl shadow-lg border border-gray-100 overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+              <div key={product.id} className="golden-hour-card h-full flex flex-col group">
                 <div className="relative h-56 overflow-hidden">
-                  <Image src={product.image} alt={product.name} fill className="object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
-                  <div className="absolute top-3 left-3 bg-gradient-farm text-white px-3 py-1 rounded text-xs font-ui font-bold shadow-md">
-                    {product.category}
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                    referrerPolicy="no-referrer"
+                  />
+                  {/* LABEL on image */}
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="type-label text-farm-text bg-farm-surface/80 backdrop-blur-sm px-3 py-1 rounded-full border border-farm-border">
+                      {product.category}
+                    </span>
                   </div>
                 </div>
-                <div className="p-5">
-                  <h3 className="font-ui font-bold text-lg text-[#1C1A14] mb-2">{product.name}</h3>
-                  <div className="text-[#D4AF37] font-display font-bold text-xl mb-4">
-                    {product.price ? `GHS ${product.price}` : 'Contact for Price'}
-                    <span className="text-[#757575] font-sans text-sm font-normal ml-1">/ {product.unit}</span>
+
+                {/* PAIRING RULE: Title + Micro — two sizes, no middle ground */}
+                <div className="p-8 flex flex-col flex-grow z-10 relative">
+                  {/* TITLE */}
+                  <h3 className="type-title text-farm-text mb-2">{product.name}</h3>
+
+                  {/* DISPLAY price (big + light) + MICRO unit (small + muted) */}
+                  <div className="mt-auto flex items-baseline gap-2 pt-4 border-t border-farm-border">
+                    <span className="font-display text-3xl font-light text-farm-gold">
+                      {product.price ? `GHS ${product.price}` : 'On Request'}
+                    </span>
+                    {product.unit && (
+                      <span className="type-micro">/ {product.unit}</span>
+                    )}
                   </div>
                 </div>
               </div>
             ))}
           </AnimatedGrid>
 
-          <div className="mt-16 text-center">
-            <Link href="/shop" className="inline-flex items-center gap-2 bg-gradient-farm text-white px-8 py-4 rounded-lg font-ui font-bold shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-              Order Online Now <ArrowRight size={20} />
+          <div className="mt-16 flex justify-center">
+            <Link href="/shop" className="btn-primary">
+              Add to Order <ArrowRight size={16} />
             </Link>
           </div>
         </div>
       </section>
 
       {/* Export Teaser */}
-      <section className="py-16 bg-white border-t border-gray-100 shadow-inner">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-display font-bold text-[#1C1A14] mb-4">Looking for Export Products?</h2>
-          <p className="text-[#424242] font-sans mb-6">We export premium Ghanaian Yams, Sweet Corn, and Soybeans to the UK and European Union.</p>
-          <Link href="/export" className="text-[#0D3B17] font-ui font-bold border-b-2 border-[#D4AF37] pb-1 hover:text-[#2E7D32]">
-            View our Export Services
+      <section className="py-20 bg-farm-surface-card border-t border-farm-border">
+        <div className="max-w-2xl mx-auto px-6 text-center flex flex-col items-center">
+          <span className="eyebrow">International Buyers</span>
+          <h2 className="type-headline text-farm-text mb-4">Looking for export products?</h2>
+          <p className="type-body text-farm-text-muted mx-auto mb-8">
+            We export premium Ghanaian Yams, Sweet Corn, and Soybeans to the UK and European Union.
+          </p>
+          <Link href="/export" className="btn-secondary">
+            View Export Services <ArrowRight size={16} />
           </Link>
         </div>
       </section>
-    </div>
     </div>
   );
 }

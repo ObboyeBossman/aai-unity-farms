@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 
-export function StatCounter({ end, duration = 2000, suffix = '' }: { end: number, duration?: number, suffix?: string }) {
+export function StatCounter({ end, duration = 2000, suffix = '', className }: { end: number, duration?: number, suffix?: string, className?: string }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -40,7 +40,7 @@ export function StatCounter({ end, duration = 2000, suffix = '' }: { end: number
   }, [isVisible, end, duration]);
 
   return (
-    <span ref={ref} className="font-display font-bold text-4xl text-[#D4AF37]">
+    <span ref={ref} className={className || "font-display font-bold text-4xl text-farm-gold"}>
       {count.toLocaleString()}{suffix}
     </span>
   );

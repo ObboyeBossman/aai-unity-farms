@@ -4,67 +4,87 @@ import Link from 'next/link';
 import { Globe, Plane, ShieldCheck, FileCheck } from 'lucide-react';
 import { motion } from 'motion/react';
 
+const shopifyEase = [0.2, 0, 0, 1] as const;
+
+const reasons = [
+  {
+    icon: ShieldCheck,
+    title: 'Quality Assurance',
+    body: 'Every shipment undergoes rigorous quality control to ensure only premium grade produce leaves our facility.',
+  },
+  {
+    icon: FileCheck,
+    title: 'Compliance & Documentation',
+    body: 'Full compliance with UK and EU phytosanitary regulations. We handle all necessary export documentation seamlessly.',
+  },
+  {
+    icon: Plane,
+    title: 'Reliable Logistics',
+    body: 'Strategic partnerships with freight forwarders ensure timely and temperature-controlled delivery to your port.',
+  },
+];
+
 export function ExportWhyUs() {
   return (
-    <section className="py-24 bg-[#0D3B17] text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-[#D4AF37] font-ui font-bold tracking-widest uppercase mb-2">Export Standards</h2>
-            <h3 className="text-4xl font-display font-bold text-white mb-8">Why Partner With Us?</h3>
-            
-            <div className="space-y-6">
-              <div className="flex gap-4 group">
-                <div className="w-12 h-12 rounded-full bg-[#1B5E20] flex items-center justify-center shrink-0 group-hover:bg-[#D4AF37] transition-colors">
-                  <ShieldCheck className="text-[#D4AF37] group-hover:text-[#0D3B17] transition-colors" />
-                </div>
-                <div>
-                  <h4 className="font-ui font-bold text-xl mb-1">Quality Assurance</h4>
-                  <p className="text-[#C8E6C9] font-sans">Every shipment undergoes rigorous quality control to ensure only premium grade produce leaves our facility.</p>
-                </div>
-              </div>
-              
-              <div className="flex gap-4 group">
-                <div className="w-12 h-12 rounded-full bg-[#1B5E20] flex items-center justify-center shrink-0 group-hover:bg-[#D4AF37] transition-colors">
-                  <FileCheck className="text-[#D4AF37] group-hover:text-[#0D3B17] transition-colors" />
-                </div>
-                <div>
-                  <h4 className="font-ui font-bold text-xl mb-1">Compliance & Documentation</h4>
-                  <p className="text-[#C8E6C9] font-sans">Full compliance with UK and EU phytosanitary regulations. We handle the necessary export documentation seamlessly.</p>
-                </div>
-              </div>
+    <section className="py-32 bg-farm-surface-card border-t border-farm-border">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
 
-              <div className="flex gap-4 group">
-                <div className="w-12 h-12 rounded-full bg-[#1B5E20] flex items-center justify-center shrink-0 group-hover:bg-[#D4AF37] transition-colors">
-                  <Plane className="text-[#D4AF37] group-hover:text-[#0D3B17] transition-colors" />
-                </div>
-                <div>
-                  <h4 className="font-ui font-bold text-xl mb-1">Reliable Logistics</h4>
-                  <p className="text-[#C8E6C9] font-sans">Strategic partnerships with freight forwarders ensure timely and temperature-controlled delivery to your port.</p>
-                </div>
-              </div>
+          {/* Left — Reasons */}
+          <motion.div
+            initial={{ opacity: 0, x: -12 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.34, ease: shopifyEase }}
+            className="flex flex-col"
+          >
+            <span className="eyebrow">Export Standards</span>
+            <h2 className="type-headline text-farm-text mb-14">Why partner with us?</h2>
+
+            <div className="flex flex-col gap-10">
+              {reasons.map(({ icon: Icon, title, body }, i) => (
+                <motion.div
+                  key={title}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.3, delay: i * 0.04, ease: shopifyEase }}
+                  className="flex gap-5 group"
+                >
+                  <div className="w-10 h-10 rounded-full border border-farm-border flex items-center justify-center shrink-0 transition-colors duration-200 group-hover:border-farm-gold">
+                    <Icon className="text-farm-gold" size={18} />
+                  </div>
+                  <div>
+                    {/* TITLE */}
+                    <h3 className="type-title text-farm-text mb-2" style={{ fontSize: '18px' }}>{title}</h3>
+                    {/* BODY */}
+                    <p className="type-body text-farm-text-muted" style={{ fontSize: '15px' }}>{body}</p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
+
+          {/* Right — CTA Card */}
+          <motion.div
+            initial={{ opacity: 0, x: 12 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="glass-panel-dark p-10 rounded-2xl text-center shadow-2xl"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.34, delay: 0.08, ease: shopifyEase }}
+            className="golden-hour-card p-12 flex flex-col items-center text-center lg:sticky lg:top-32"
           >
-            <Globe className="mx-auto text-[#D4AF37] mb-6 animate-pulse" size={64} />
-            <h4 className="text-2xl font-display font-bold mb-4">Serving Europe</h4>
-            <p className="text-[#C8E6C9] font-sans mb-8">We are actively expanding our export network across the United Kingdom and the European Union.</p>
-            <Link href="/quote" className="inline-block w-full py-4 bg-gradient-farm text-white font-ui font-bold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+            <Globe className="text-farm-gold mb-8 relative z-10" size={56} />
+            {/* TITLE */}
+            <h3 className="type-title text-farm-text mb-4 relative z-10">Serving Europe</h3>
+            {/* BODY */}
+            <p className="type-body text-farm-text-muted mx-auto mb-10 relative z-10">
+              We are actively expanding our export network across the United Kingdom and the European Union.
+            </p>
+            <Link href="/quote" className="btn-primary w-full justify-center relative z-10">
               Request Export Quote
             </Link>
           </motion.div>
+
         </div>
       </div>
     </section>

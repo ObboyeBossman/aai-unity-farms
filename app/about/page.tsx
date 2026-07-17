@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description: 'Learn about AAI Unity Farms — a trusted Ghanaian agribusiness with over 10 years supplying quality eggs, poultry, and farm products to Ghana and international markets.',
 };
 
+const shopifyEaseStyle = { transitionTimingFunction: 'cubic-bezier(0.2,0,0,1)' };
+
 export default function AboutPage() {
   const values = [
     { name: 'Quality', description: 'Uncompromising standards in every product we deliver, from farm to table or export.' },
@@ -19,12 +21,11 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="pt-20 relative">
-      <div className="relative z-10">
-      {/* Hero Section */}
-      <section className="relative h-[400px] flex items-center justify-center">
+    <div className="pt-24">
+      {/* Hero */}
+      <section className="relative h-[400px] flex items-center justify-center border-b border-farm-border overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[#0D3B17]/80 z-10" />
+          <div className="absolute inset-0 bg-farm-surface/50 z-10" />
           <Image
             src={MEDIA.heroAbout}
             alt="About AAI Unity Farms"
@@ -34,38 +35,48 @@ export default function AboutPage() {
             referrerPolicy="no-referrer"
           />
         </div>
-        <div className="relative z-20 text-center text-white px-4">
-          <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">About Us</h1>
-          <p className="font-ui text-lg text-[#C8E6C9] max-w-2xl mx-auto">
-            A trusted poultry and food production business specializing in quality farm products.
-          </p>
+        <div className="relative z-20 text-center px-6 flex flex-col items-center fade-up">
+          <span className="eyebrow">Who We Are</span>
+          {/* DISPLAY — one per screen, weight 300 */}
+          <h1 className="type-display text-farm-text">About Us</h1>
         </div>
       </section>
 
-      {/* Bio & Story */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-[#D4AF37] font-ui font-bold tracking-widest uppercase mb-2">Who We Are</h2>
-              <h3 className="text-3xl font-display font-bold text-[#1C1A14] mb-6">Rooted in Ghana, Serving the World</h3>
-              <p className="text-[#424242] leading-relaxed mb-6 font-sans text-lg">
-                AAI Unity Farms is a trusted poultry and food production business specializing in quality poultry products, fresh eggs, and nutritious food solutions.
+      {/* Story — heading → body 80ms → CTA 160ms */}
+      <section className="py-32">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div className="flex flex-col">
+              <span className="eyebrow">Our Heritage</span>
+              {/* HEADLINE — 2-5 words */}
+              <h2 className="type-headline text-farm-text mb-8">
+                Rooted in Ghana,<br />Serving the World.
+              </h2>
+              {/* BODY — max 62ch, never wider */}
+              <p className="type-body text-farm-text-muted mb-4">
+                AAI Unity Farms is a trusted poultry and food production business specializing
+                in quality poultry products, fresh eggs, and nutritious food solutions.
               </p>
-              <p className="text-[#424242] leading-relaxed mb-6 font-sans text-lg">
-                We are committed to providing healthy, affordable, and reliable farm products while maintaining high standards in farming, quality, and customer satisfaction. Our goal is to support families, businesses, and communities with fresh farm produce through sustainable poultry farming, innovation, and dedication to excellence.
+              <p className="type-body text-farm-text-muted mb-10">
+                We are committed to providing healthy, affordable, and reliable farm products
+                while maintaining high standards in farming, quality, and customer satisfaction.
+                Our goal is to support families, businesses, and communities through sustainable
+                poultry farming, innovation, and dedication to excellence.
               </p>
-              <div className="p-6 bg-[#F1F8E9] border-l-4 border-[#2E7D32] rounded-r-lg mt-8">
-                <p className="text-[#0D3B17] font-display text-xl italic font-medium">
-                  &quot;Our goal is to support families, businesses, and communities with fresh farm produce through sustainable poultry farming, innovation, and dedication to excellence.&quot;
+              {/* Quote — TITLE weight as blockquote */}
+              <blockquote className="border-l-2 border-farm-gold pl-6 py-2">
+                <p className="type-title text-farm-text font-display font-light italic">
+                  &ldquo;Supporting communities with fresh farm produce through sustainable
+                  farming, innovation, and dedication to excellence.&rdquo;
                 </p>
-              </div>
+              </blockquote>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="relative h-64 rounded-xl overflow-hidden shadow-lg mt-8">
-                <Image src={MEDIA.gallery03} alt="Farming" fill className="object-cover" referrerPolicy="no-referrer" />
+
+            <div className="grid grid-cols-2 gap-6">
+              <div className="relative h-72 rounded-xl overflow-hidden border border-farm-border mt-16">
+                <Image src={MEDIA.gallery03} alt="Farm operations" fill className="object-cover" referrerPolicy="no-referrer" />
               </div>
-              <div className="relative h-64 rounded-xl overflow-hidden shadow-lg">
+              <div className="relative h-72 rounded-xl overflow-hidden border border-farm-border">
                 <Image src={MEDIA.gallery04} alt="Poultry" fill className="object-cover" referrerPolicy="no-referrer" />
               </div>
             </div>
@@ -73,53 +84,65 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Mission & Vision */}
-      <section className="py-20 bg-[#0D3B17] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="bg-[#1B5E20] p-10 rounded-2xl border border-[#2E7D32]">
-              <div className="w-16 h-16 bg-[#D4AF37] rounded-full flex items-center justify-center mb-6">
-                <span className="font-display font-bold text-2xl text-[#0D3B17]">M</span>
+      {/* Mission & Vision — stagger 40ms apart */}
+      <section className="py-32 bg-farm-surface-card border-y border-farm-border">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <span className="eyebrow">Purpose</span>
+            <h2 className="type-headline text-farm-text">Mission & Vision</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                letter: 'M',
+                title: 'Our Mission',
+                body: 'To produce and supply high-quality agricultural products while promoting sustainable farming and creating value for customers in Ghana and international markets.',
+              },
+              {
+                letter: 'V',
+                title: 'Our Vision',
+                body: "To become one of Ghana's leading agribusiness companies, recognized across Africa and Europe for quality, innovation, and reliability.",
+              },
+            ].map(({ letter, title, body }) => (
+              <div key={title} className="golden-hour-card p-10 flex flex-col">
+                <div className="w-12 h-12 rounded-full border border-farm-gold/30 flex items-center justify-center mb-8">
+                  <span className="type-label text-farm-gold">{letter}</span>
+                </div>
+                {/* TITLE */}
+                <h3 className="type-title text-farm-text mb-4">{title}</h3>
+                {/* BODY */}
+                <p className="type-body text-farm-text-muted">{body}</p>
               </div>
-              <h3 className="text-2xl font-display font-bold mb-4 text-[#FFF8E1]">Our Mission</h3>
-              <p className="text-[#C8E6C9] font-sans text-lg leading-relaxed">
-                To produce and supply high-quality agricultural products while promoting sustainable farming and creating value for customers in Ghana and international markets.
-              </p>
-            </div>
-            <div className="bg-[#1B5E20] p-10 rounded-2xl border border-[#2E7D32]">
-              <div className="w-16 h-16 bg-[#D4AF37] rounded-full flex items-center justify-center mb-6">
-                <span className="font-display font-bold text-2xl text-[#0D3B17]">V</span>
-              </div>
-              <h3 className="text-2xl font-display font-bold mb-4 text-[#FFF8E1]">Our Vision</h3>
-              <p className="text-[#C8E6C9] font-sans text-lg leading-relaxed">
-                To become one of Ghana&apos;s leading agribusiness companies, recognized across Africa and Europe for quality, innovation, and reliability.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Core Values */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-[#D4AF37] font-ui font-bold tracking-widest uppercase mb-2">Our Principles</h2>
-            <h3 className="text-3xl font-display font-bold text-[#1C1A14]">Core Values</h3>
+      <section className="py-32">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-20 flex flex-col items-center">
+            <span className="eyebrow">Our Principles</span>
+            <h2 className="type-headline text-farm-text">Core Values</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {values.map((value) => (
-              <div key={value.name} className="flex gap-4 p-6 bg-[#FAFAF5] rounded-xl border border-gray-100">
-                <CheckCircle2 className="text-[#2E7D32] shrink-0" size={24} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {values.map(({ name, description }) => (
+              <div
+                key={name}
+                className="flex gap-5 p-8 bg-farm-surface-card rounded-xl border border-farm-border"
+              >
+                <CheckCircle2 className="text-farm-gold shrink-0 mt-1" size={20} />
                 <div>
-                  <h4 className="font-ui font-bold text-[#1C1A14] text-lg mb-2">{value.name}</h4>
-                  <p className="text-[#424242] font-sans text-sm leading-relaxed">{value.description}</p>
+                  {/* TITLE */}
+                  <h4 className="type-title text-farm-text mb-3" style={{ fontSize: '18px' }}>{name}</h4>
+                  {/* BODY — max 62ch */}
+                  <p className="type-body text-farm-text-muted" style={{ fontSize: '15px' }}>{description}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-    </div>
     </div>
   );
 }

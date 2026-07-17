@@ -1,72 +1,340 @@
 @import "tailwindcss";
 
+@theme {
+  --color-farm-surface: var(--farm-surface-val);
+  --color-farm-surface-card: var(--farm-surface-card-val);
+  --color-farm-text: var(--farm-text-val);
+  --color-farm-text-muted: var(--farm-text-muted-val);
+  --color-farm-gold: var(--farm-gold-val);
+  --color-farm-border: var(--farm-border-val);
+
+  --font-display: var(--font-playfair), serif;
+  --font-body: var(--font-inter), sans-serif;
+}
+
+@layer base {
+  :root {
+    --farm-surface-val: #FAFAF7;
+    --farm-surface-card-val: #FFFFFF;
+    --farm-text-val: #1C1A14;
+    --farm-text-muted-val: #6B7280;
+    --farm-gold-val: #D4AF37;
+    --farm-border-val: #0000001A;
+  }
+
+  .dark {
+    --farm-surface-val: #0E1510;
+    --farm-surface-card-val: #162019;
+    --farm-text-val: #F0F0ED;
+    --farm-text-muted-val: #8A9E8D;
+    --farm-gold-val: #D4AF37;
+    --farm-border-val: #FFFFFF22;
+  }
+
+  body {
+    background-color: var(--color-farm-surface);
+    color: var(--color-farm-text);
+    font-family: var(--font-body);
+  }
+
+  /* Shopify Contrast Rule:
+     Large type is LIGHT (300-400) — commands presence without screaming.
+     Small type is MEDIUM (500)    — readable without disappearing. */
+
+  /* DISPLAY — 72-96px, weight 300. One per screen. */
+  .type-display {
+    font-family: var(--font-display);
+    font-size: clamp(64px, 8vw, 96px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  /* HEADLINE — 40-56px, weight 400. Section opener. 2-5 words. */
+  .type-headline {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 56px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  /* TITLE — 24-32px, weight 500. Card header. */
+  .type-title {
+    font-family: var(--font-body);
+    font-size: clamp(24px, 2.5vw, 32px);
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  /* BODY — 15-17px, weight 400, line-height 1.6, max 62ch. */
+  .type-body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 62ch;
+  }
+
+  /* LABEL — 12-13px, weight 500, UPPERCASE, tracked. */
+  .type-label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* MICRO — 10-11px, muted only. */
+  .type-micro {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--color-farm-text-muted);
+  }
+}
+
 @layer utilities {
-  .bg-gradient-farm {
-    background: linear-gradient(135deg, #0D3B17 0%, #1B5E20 50%, #D4AF37 100%);
-  }
-  
-  .bg-gradient-subtle {
-    background: linear-gradient(to bottom right, #FAFAFA, #F1F8E9, #FFFDE7);
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     SHOPIFY MOTION SYSTEM
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /* Entry easing — fast out, gentle settle */
+  .ease-shopify {
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
   }
 
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     CARD ENTRANCE — 16px upward drift + fade
+     Duration: 300ms, Shopify ease
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  @keyframes card-enter {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .card-enter {
+    animation: card-enter 300ms cubic-bezier(0.2, 0, 0, 1) both;
+  }
+
+  /* Stagger delays — 40ms apart, max 6 items */
+  .stagger-1 { animation-delay: 0ms; }
+  .stagger-2 { animation-delay: 40ms; }
+  .stagger-3 { animation-delay: 80ms; }
+  .stagger-4 { animation-delay: 120ms; }
+  .stagger-5 { animation-delay: 160ms; }
+  .stagger-6 { animation-delay: 200ms; }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     SECTION ENTRANCE — heading first,
+     body 80ms later, CTA 160ms after that
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up {
+    animation: fade-up 320ms cubic-bezier(0.2, 0, 0, 1) both;
+  }
+
+  .fade-up-delay-1 { animation-delay: 80ms; }
+  .fade-up-delay-2 { animation-delay: 160ms; }
+  .fade-up-delay-3 { animation-delay: 240ms; }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     INTERACTIVE STATES
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /* Primary button — scale(0.97) on press, 80ms */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background-color: var(--color-farm-gold);
+    color: var(--color-farm-surface);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                transform 80ms cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .btn-primary:hover {
+    background-color: #e8c547;
+  }
+
+  .btn-primary:active {
+    transform: scale(0.97);
+  }
+
+  .btn-primary:focus-visible {
+    outline: 2px solid var(--color-farm-gold);
+    outline-offset: 2px;
+  }
+
+  /* Secondary button */
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background-color: transparent;
+    color: var(--color-farm-text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 1px solid var(--color-farm-border);
+    cursor: pointer;
+    transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1),
+                transform 80ms cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-farm-surface-card);
+  }
+
+  .btn-secondary:active {
+    transform: scale(0.97);
+  }
+
+  .btn-secondary:focus-visible {
+    outline: 2px solid var(--color-farm-gold);
+    outline-offset: 2px;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     GLASS PANEL
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   .glass-panel {
-    @apply bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_0_rgba(13,59,23,0.1)];
-  }
-  
-  .glass-panel-dark {
-    @apply bg-[#0D3B17]/80 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
+    background-color: color-mix(in srgb, var(--color-farm-surface-card) 75%, transparent);
+    backdrop-filter: blur(32px);
+    border: 1px solid var(--color-farm-border);
   }
 
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#0D3B17] to-[#D4AF37];
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     SIGNATURE MOVE: Golden Hour Glow
+     On hover: gold gradient border traces the card edge
+     Inner warm radial lifts the content
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  .golden-hour-card {
+    position: relative;
+    background-color: var(--color-farm-surface-card);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 200ms cubic-bezier(0.2, 0, 0, 1),
+                box-shadow 200ms cubic-bezier(0.2, 0, 0, 1);
   }
 
-  .bg-mesh {
-    background-color: #FAFAFA;
-    background-image:
-      radial-gradient(at 0% 0%, rgba(212, 175, 55, 0.05) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(27, 94, 32, 0.05) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(212, 175, 55, 0.05) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, rgba(13, 59, 23, 0.05) 0px, transparent 50%);
+  .golden-hour-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    transition: background 320ms cubic-bezier(0.2, 0, 0, 1);
+    z-index: 1;
+  }
+
+  .golden-hour-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(212, 175, 55, 0.06), transparent 65%);
+    opacity: 0;
+    transition: opacity 320ms cubic-bezier(0.2, 0, 0, 1);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .golden-hour-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .golden-hour-card:hover::before {
+    background: linear-gradient(135deg, var(--color-farm-gold) 0%, rgba(212, 175, 55, 0.15) 50%, transparent 100%);
+  }
+
+  .golden-hour-card:hover::after {
+    opacity: 1;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     INPUT STATES — 120ms border transition
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  .farm-input {
+    width: 100%;
+    padding: 14px 16px;
+    background-color: var(--color-farm-surface);
+    color: var(--color-farm-text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    border: 1px solid var(--color-farm-border);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 120ms cubic-bezier(0.2, 0, 0, 1),
+                box-shadow 120ms cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .farm-input::placeholder {
+    color: var(--color-farm-text-muted);
+    opacity: 0.6;
+  }
+
+  .farm-input:focus {
+    border-color: var(--color-farm-gold);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
+  }
+
+  .farm-input:focus-visible {
+    border-color: var(--color-farm-gold);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     EYEBROW LABEL — always before headlines
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-farm-gold);
+    margin-bottom: 16px;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     RESPECT REDUCED MOTION
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-/* Custom animated gradient background for stats or banners */
-@keyframes gradient-xy {
-  0%, 100% {
-    background-size: 400% 400%;
-    background-position: 0% 0%;
-  }
-  50% {
-    background-size: 200% 200%;
-    background-position: 100% 100%;
-  }
-}
 
-@keyframes float {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  33% { transform: translateY(-20px) translateX(10px); }
-  66% { transform: translateY(10px) translateX(-15px); }
-}
-
-@keyframes pulse-slow {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.1); }
-}
-
-.animate-float {
-  animation: float 10s ease-in-out infinite;
-}
-
-.animate-float-delayed {
-  animation: float 12s ease-in-out infinite reverse;
-  animation-delay: 2s;
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 8s ease-in-out infinite;
-}
-
-.animate-gradient-xy {
-  animation: gradient-xy 15s ease infinite;
-}
