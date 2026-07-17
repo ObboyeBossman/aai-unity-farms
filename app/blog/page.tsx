@@ -41,29 +41,30 @@ export default function BlogPage() {
   return (
     <div className="pt-28 pb-20 min-h-screen relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-display font-bold text-[#1C1A14] mb-4">Blog & News</h1>
-          <p className="text-[#424242] font-sans text-lg max-w-2xl mx-auto">
+
+        <div className="text-center mb-16 flex flex-col items-center">
+          <span className="eyebrow">Insights & Updates</span>
+          <h1 className="type-display text-farm-text mb-4">Blog & News</h1>
+          <p className="type-body text-farm-text-muted mx-auto">
             Insights, farming tips, and the latest updates from AAI Unity Farms.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map(post => (
-            <article key={post.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden group flex flex-col">
+            <article key={post.id} className="bg-farm-surface-card rounded-2xl border border-farm-border overflow-hidden group flex flex-col">
               <div className="relative h-56 overflow-hidden">
                 <Image src={post.image} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
-                <div className="absolute top-4 left-4 bg-[#D4AF37] text-[#0D3B17] px-3 py-1 rounded-full text-xs font-ui font-bold">
+                <div className="absolute top-4 left-4 bg-farm-gold text-farm-surface px-3 py-1 rounded-full type-label" style={{ marginBottom: 0 }}>
                   {post.category}
                 </div>
               </div>
-              <div className="p-6 flex flex-col flex-grow">
-                <span className="text-[#757575] font-ui text-sm mb-3 block">{post.date}</span>
-                <h3 className="font-display font-bold text-xl text-[#1C1A14] mb-3 group-hover:text-[#2E7D32] transition-colors">{post.title}</h3>
-                <p className="text-[#424242] font-sans text-sm leading-relaxed mb-6 flex-grow">{post.excerpt}</p>
-                
-                <Link href="#" className="inline-flex items-center gap-2 text-[#0D3B17] font-ui font-bold hover:text-[#D4AF37] transition-colors mt-auto">
+              <div className="p-6 flex flex-col flex-grow gap-3">
+                <span className="type-micro">{post.date}</span>
+                <h3 className="type-title text-farm-text group-hover:text-farm-gold transition-colors">{post.title}</h3>
+                <p className="type-body text-farm-text-muted flex-grow" style={{ fontSize: '14px' }}>{post.excerpt}</p>
+
+                <Link href="#" className="inline-flex items-center gap-2 type-label text-farm-gold hover:text-farm-text transition-colors mt-auto">
                   Read Article <ArrowRight size={16} />
                 </Link>
               </div>

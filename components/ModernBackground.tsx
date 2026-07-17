@@ -14,9 +14,9 @@ export function ModernBackground() {
       <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-[#1B5E20]/10 blur-[120px] animate-float-delayed"></div>
 
       {/* Subtle Grid */}
-      <div className="absolute inset-0 opacity-[0.03]"
+      <div className="absolute inset-0 opacity-[0.06]"
         style={{
-          backgroundImage: `radial-gradient(#0D3B17 1px, transparent 1px)`,
+          backgroundImage: `radial-gradient(var(--color-farm-text) 1px, transparent 1px)`,
           backgroundSize: '40px 40px'
         }}>
       </div>
