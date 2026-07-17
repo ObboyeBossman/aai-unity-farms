@@ -625,17 +625,46 @@
     to   { opacity: 1; transform: translateX(0); }
   }
 
-  /* ── Mobile: replace 3D flip with 2D opacity/translate swap ──
-     Safari/WebKit on mobile has a known bug where preserve-3d
-     inside scroll containers breaks backface-visibility, causing
-     the back face to bleed through mirrored. We ditch the 3D
-     entirely on small screens and use a clean crossfade instead. */
+  /* ── Mobile: 2-col grid — tighter card dimensions ─────────── */
   @media (max-width: 640px) {
     .flip-card-scene {
-      height: 460px;
+      height: 380px;
     }
 
-    /* Kill all 3D transforms on mobile */
+    .flip-back-inner {
+      padding: 16px;
+    }
+
+    .flip-back-title {
+      font-size: 15px;
+    }
+
+    .flip-price-num {
+      font-size: 18px;
+    }
+
+    .flip-features {
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .flip-ctas {
+      gap: 8px;
+    }
+
+    .flip-ctas .btn-primary,
+    .flip-ctas .btn-secondary {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 12px;
+    }
+
+  /* ── Mobile: 2D crossfade swap (fixes WebKit 3D bleed-through) ──
+     Safari on mobile breaks backface-visibility inside scroll containers.
+     We replace the 3D flip with a clean opacity+translateY crossfade.   */
+  @media (max-width: 640px) {
+
+    /* Kill all 3D transforms */
     .flip-card-inner {
       transform-style: flat;
       transition: none;
