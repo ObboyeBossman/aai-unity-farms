@@ -24,25 +24,29 @@ export default function GalleryPage() {
   return (
     <div className="pt-28 pb-20 min-h-screen relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-display font-bold text-[#1C1A14] mb-4">Farm Gallery</h1>
-          <p className="text-[#424242] font-sans text-lg max-w-2xl mx-auto">
+
+        <div className="text-center mb-16 flex flex-col items-center">
+          <span className="eyebrow">Behind The Farm</span>
+          <h1 className="type-display text-farm-text mb-4">Farm Gallery</h1>
+          <p className="type-body text-farm-text-muted mx-auto">
             Take a look inside our operations, from poultry farming in Dormaa Ahenkro to our export packaging processes.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {photos.map((src, index) => (
-            <div key={index} className="relative h-64 md:h-80 rounded-xl overflow-hidden group shadow-sm hover:shadow-xl transition-shadow cursor-pointer">
-              <Image 
-                src={src} 
-                alt={`Gallery image ${index + 1}`} 
-                fill 
-                className="object-cover group-hover:scale-110 transition-transform duration-700" 
+            <div
+              key={index}
+              className="relative h-64 md:h-80 rounded-xl overflow-hidden border border-farm-border group cursor-pointer"
+            >
+              <Image
+                src={src}
+                alt={`Farm gallery photo ${index + 1}`}
+                fill
+                className="object-cover group-hover:scale-110 transition-transform duration-700"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+              <div className="absolute inset-0 bg-farm-surface/0 group-hover:bg-farm-surface/20 transition-colors duration-300" />
             </div>
           ))}
         </div>
