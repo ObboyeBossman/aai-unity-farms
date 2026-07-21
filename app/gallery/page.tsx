@@ -49,7 +49,7 @@ export default function GalleryPage() {
               {/* Glassmorphism overlay — fades in after zoom starts */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100
                               backdrop-blur-md
-                              bg-white/[0.08]
+                              bg-farm-surface/30
                               flex flex-col items-center justify-center gap-4">
 
                 {/* Logo */}
